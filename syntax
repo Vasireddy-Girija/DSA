@@ -1,0 +1,29 @@
+primitive data types(8) - byte, short, int, float, double, long, char, boolean
+
+Arrays - can be created for primitive & non-primitive data types.
+int[] arr = new arr[n]; where n is thetotal number of integers in the array.
+Integer[] arr = new Integer[n];
+Length of arr - arr.length;
+Initialise all elements of arr with default value - Arrays.fill(arr, -1); here -1 is default value.
+
+List - List is an interface. Cannot create lists with primitives as it is not supported for Generics.
+ArrayList is implementation of List interface.
+List<Integer> lst = new ArrayList<>();
+Size of array list - lst.size();
+
+Map -
+Map<Integer, String> map = new HashMap<>();
+map.size();
+map.containsKey(key);
+map.putIfAbsent(key, value); //If key is already present, then it will not do anything.
+map.put(key, value);
+map.get(key); // Always check if key is present in map and then use map.get(key);
+
+Queue - First In Last Out data structure (FIFO)
+Queue q = new LinkedList<>();
+q.isEmpty()
+q.size()
+q.add() //Adds at the back of queue.
+q.poll() - returns front element.
+
+Stack - Last In First Out (LIFO)
