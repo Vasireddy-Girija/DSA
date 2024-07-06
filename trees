@@ -1,0 +1,79 @@
+How to create a tree -
+class TreeNode{
+  int val;
+  TreeNode left;
+  TreeNode right;
+  
+  TreeNode(int val){
+    this.val = val;
+    TreeNode left = null;
+    TreeNode tight = null;
+  }
+}
+
+Traversals -
+DFS - inOrder, preOrder, postOrder
+1.Inorder traversal (left, root, right)
+2.Preorder traversal (root, left, right)
+3.Post order traversal (left, right, root)
+*If we have Inorder & preOrder traversals, we can construct a unique binary tree.
+*If we have Inorder & postOrder traversals, we can construct a unique binary tree.
+*If we have preOrder & postOrder traversals, we cannot construct a unique binary tree, we can construct multiple trees.
+
+BFS - levelOrder
+
+####################################################################################################################
+Find height of binary tree -
+public int maxHeight(TreeNode root){
+  if(root == null) return 0;
+  int lHeight = maxHeight(root.left);
+  int rHeight = maxHeight(root.right);
+  return 1+ Math.max(lHeight, rHeight);
+}
+Example problems on which uses Height algo -
+1.Check if a binary tree is height balanced or not - At every node, lHeight and rHeight shouldn't differ by 1.
+  After getting lHeight & rHeight, check if Math.abs(lHeight-rHeight) > 1 => return -1;
+  If atleast one node has crossed the condition, we should continue returning -1.
+public int heightBalanced(TreeNode root){
+  if(root == null) return 0;
+  int lHeight = maxHeight(root.left);
+  if(lHeight == -1) return -1;
+  int rHeight = maxHeight(root.right);
+  if(rHeight == -1) return -1;
+  if(Math.abs(lHeight-rHeight) > 1) return -1;
+  return 1+ Math.max(lHeight, rHeight);
+}
+
+2.Diamaeter of a binary tree (max distance between any two nodes)
+  For any node, diameter which passes through it - lHeight+rHeight
+  *Take an array of size 1, check if we can update it for every node. This will be the ans.
+public int maxDiamater(TreeNode root, int[] maxLength){
+  if(root == null) return 0;
+  int lHeight = maxDiamater(root.left, maxLength);
+  int rHeight = maxDiamater(root.right, maxLength);
+  maxLength[0] = Math.max(maxLength[0], lHeight+rHeight);
+  return 1+ Math.max(lHeight, rHeight);
+}
+ans will be maxLength[0].
+
+3.Max path sum (Between any two nodes, find the sum of all the nodes between the two nodes)
+*The sum might not be between 2 leaf nodes as nodes can contain -ve values. But for the sum, we need all nodes to be consecutive.
+public int maxSum(TreeNode root, int[] maxVal){
+  if(root == null) return 0;
+  int lHeight = Math.max(0, maxSum(root.left)); //to handle -ve values.
+  int rHeight = Math.max(0, maxSum(root.right));
+  maxVal[0] = Math.max(maxVal[0], root.val+lHeight+rHeight);
+  return root.val+ Math.max(lHeight, rHeight);
+}
+Initialise with maxval[0] = Integer.MIN_VALUE, ans will be maxVal[0].
+
+####################################################################################################################
+Boundary Traversal
+Vertical order Traversal
+Top View
+Bottom View
+Right/Left View
+
+####################################################################################################################
+How to find parent for a binary tree - 
+Map<TreeNode, TreeNode> - map of child & parent.
