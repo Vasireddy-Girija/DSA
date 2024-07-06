@@ -1,0 +1,11 @@
+Three types -
+1.Max or min among all possibilities
+2.Count all possibilities
+3.Check if this is possible or not (true/ false) 
+
+*All subsequence problems can be solved using recursion.
+*recursion is a bottom-up approach. Convert all problems to handle with indexes. Base condition - if index reaches n(array length), then return accordingly.
+
+Base conditions - Check if we can have either or both base conditions while solving the problem.
+a)Condition which is not possible.
+b)Condition which is least possible.
