@@ -1,0 +1,2 @@
+Total sub arrays that can be created with array of size n - (n)*(n+1)/2 [This doesn't include empty subArrays)
+Total sub sequences that can be created with array of size n - (int)Math.pow(2,n)
