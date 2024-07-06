@@ -7,3 +7,59 @@ Four types of problems -
       In Type-2 problems, we can't decide whether to move l or r. If we move l or r randomly, we ignore considering some sub-arrays.
       We solve it by using type-1 : count(sum<=k) - count(sum<=k-1)
 4.Find minLength of subArray
+
+For all the problems, take 2 pointers - l=0, r=0. SubArray includes l and r.
+Use while loop. For each loop, do the operation on element r, based on condition, check when to move l. Increment r in every loop.
+Length of array between 2 poins l & r = r-l+1;
+
+Type-1: Find max sum of subArray of length k. //Both l and r should be incremented in each loop.
+for(int i=0; i<k; i++) sum += arr[i];
+maxSum = sum;
+while(r < n-1){
+  sum -= arr[l];
+  l+=1;
+  r+=1;
+  sum += arr[r];
+  maxSum = Math.max(sum, maxSum);
+}
+
+Type-2: Find maxLength of subArray whose sum <= k
+a)Brute force - O(N*N) // subArray from i to j
+for(int i=0; i<n; i++){
+  int sum = 0;
+  for(int j=i; j<n; j++){
+    sum += arr[j];
+    if(sum <= k) maxLen = Math.max(maxLen, j-i+1);
+    else break;
+  }
+}
+
+b)Time Complexity - O(N + N) //one N from inner while loop. //Use this if we want subArrays and not only maxLen.
+int l=0; int r=0;
+while(r < n){
+  sum += arr[r]; //Do the operation on r.
+  while(sum >k){
+    sum -= arr[l];
+    l += 1; //Check when to move l
+  }
+  maxLen = Math.max(maxLen, r-l+1);
+  r += 1; //Move r always each time.
+}
+
+c)Time Complexity - O(N) //This would be enough if we just want maxLen and not subArrays.
+int l=0; int r=0;
+while(r<n){
+  sum += arr[r];
+  if(sum > k){ //Moving l only once as it doesn't impact our ans - maxLen as l and r are moved by 1  keeping r-l+1 constant.
+    sum -= arr[l];
+    l += 1;
+  }
+  maxLen = Math.max(maxLen, r-l+1);
+  r += 1;
+}
+
+Type-3:
+Case-1: Find count of sub-arrays with sum<=k
+int l=0; int r=0;
+while(r < n){
+}
