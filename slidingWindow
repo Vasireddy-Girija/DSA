@@ -1,0 +1,9 @@
+Four types of problems -
+1.SubArrays with constant length
+2.Find maxLength of subArray which follows a specific condition.
+3.Find number of subArrays which follows a specific condition.
+  (i)Type-1 : Find number of sub-arrays with sum<=k
+  (ii)Type-2: Find number of sub-arrays with sum=k 
+      In Type-2 problems, we can't decide whether to move l or r. If we move l or r randomly, we ignore considering some sub-arrays.
+      We solve it by using type-1 : count(sum<=k) - count(sum<=k-1)
+4.Find minLength of subArray
