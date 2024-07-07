@@ -1,7 +1,10 @@
 DP - 
 All DP problems are reccursion problems where we have overlapping sub-problems.
-When to go from 0 to n-
-when to go from n to 0-
+When to go from n to 0- When you want to convert it to tabulation, this is preferrable. We tabulate by going from 0 to n.
+When to go from 0 to n- 
+1.When you want the subsequences, since we had to maintain order, go from 0 to n.
+2.When this is logical - ex: In longest increasing subsequence, we will have to go from 0 to n as prev element is imp to us.
+3.In this case, in tabulation, take the loop from n to 0.
 
 Steps in any DP problem -
 1.Get the recursive solution.
