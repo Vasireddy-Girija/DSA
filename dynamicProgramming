@@ -32,10 +32,24 @@ Type 1: Both index i & j are fixed.
 Type 2: Only one of indexes i or j is fixed, other is variable.
 Type 3: Both index i and j are variable.
 
+#################################################################################################################
 3D DP- 3 indexes
 
 
-
+#################################################################################################################
 Longest Common Subsequence -
-Longest Increasing Subsequence -
+#################################################################################################################
+Longest Increasing Subsequence - (strictly increasing)
+recursion - we need prev_index to say if we can take next element or not.
+f(ind, prev_ind){
+  if(ind == n) return 0;
+  if(prev_ind == -1 || arr[ind] > arr[prev_ind]) len = 1+ f(ind+1, ind);
+  len = Math.max(len, f(ind+1, prev_ind);
+  return len;
+}
+f(0, -1)
+
+O(N*N) solution -
+
+#################################################################################################################
 Partition DP -
