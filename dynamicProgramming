@@ -7,9 +7,26 @@ Steps in any DP problem -
 3.Create tabulation
 4.Space optimisation of tabulation technique.
 
+Hints -
+1.No.of ways (all possibilities)
+2.Min or max with some conditions
+
+#################################################################################################################
 1D DP - one index
+1.Climbing Stairs - Person can take either 1 or 2 steps.
+recursion - f(n) = f(n-1)+ f(n-2); //Number of ways person can reach n-1th step + Number of ways person can reach n-2th step.
+base case - n<0 -> return 0, n==0 || n==1 return 1.
+tabulation - dp[n] = dp[n-1]+ dp[n-2].
+space optimisation - curr = prev_1 + prev_2; prev_2 = prev_1, prev_1 = curr.
 
+2.From jump
+a)
+b)
 
+3.House robber /Max. sum of non-adjacent elements.
+a)
+b)
+#################################################################################################################
 2D DP- two indexes
 Type 1: Both index i & j are fixed.
 Type 2: Only one of indexes i or j is fixed, other is variable.
@@ -21,3 +38,4 @@ Type 3: Both index i and j are variable.
 
 Longest Common Subsequence -
 Longest Increasing Subsequence -
+Partition DP -
