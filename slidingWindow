@@ -60,6 +60,62 @@ while(r<n){
 
 Type-3:
 Case-1: Find count of sub-arrays with sum<=k
+if(k<0) return 0; *As array contains non-negative integers.
 int l=0; int r=0;
 while(r < n){
+  sum += arr[r];
+  while(sum > k){
+    sum -= arr[l];
+    l +=1;
+  }
+  count += (r-l+1) //No.of subArrays that can be made with last element as r till l, with sum <= k
 }
+return count;
+
+Case-2: Find count of sub-arrays with sum=k #Here, it is difficult to decide whether to move left or right
+Example - [2, 3, 0, 0, 1, ]
+Solution - Use case-1 to get count of sum <= k and sum <= k-1. Subtract both.
+
+Problems -
+#######################################################################################################
+Type-1
+Maximum point you can obtain from cards
+#######################################################################################################
+Type -2
+1.Longest Substring Without Repeating Characters - Given a string s, find the length of the longest 
+substring without repeating characters.
+Hint - maxLen and subArray with a condition. -> Use 2 pointer-sliding window.
+Sol - Maintain a map with recent index for each char. If we see get a char that is already in map and left pointer is less than the index in map, 
+      move left to index in map+1 and continue.
+
+2.Max Consecutive Ones III - Given a binary array nums and an integer k, return the maximum number of consecutive 1's in the array if you can flip at most k 0's.
+Hint : maxLen, consecutive - subArray -> Use 2 pointer - sliding window.
+Sol - if arr[i] ==0, count += 1, if(count >k) -> check if arr[l] is 1 and decrease it, move l+= 1. For each loop, increase r.
+
+3.Fruit into baskets - Consecutive fruits such that there should not be no more than 2 types of distinct fruits in the consecutive segment. 
+Find the len of the consecutive segment.
+Hint : maxLen, consecutive -> subArray, condition - map.size()<=2 always.
+Sol : Take a map with fruit num as key and it's count as value. Decrease count as we move l, increase count as we move r. 
+While moving l, if count necomes 0 for any fruit, remove it's entry from map.
+
+4.Longest Substring with At Most K Distinct Characters - Same as above
+Condition - map.size() <= k
+
+5.Longest repeating character replacement -
+
+
+
+#######################################################################################################
+Type -3
+1.Binary subarray with sum - Given a binary array nums and an integer goal, return the number of non-empty subarrays with a sum goal. 
+A subarray is a contiguous part of the array.
+Example -  nums = [1,0,1,0,1], goal = 2 When l=0 and r=3, if we move r, 
+
+2.Number of Substrings Containing All Three Characters - Given a string s consisting only of characters a, b and c.
+Return the number of substrings containing at least one occurrence of all these characters a, b and c.
+Example - s = "abcabc" When l is at 0 and r is at 2, we don't know whether to move r or l to right and both cases are possible. If we choose one, the other subArray will be lost.
+Hint - subArray, count, confusion whether to move l or r => Type -3 problem.
+Sol : All sub arrays - count of sub arrays where distinct elements are <= 2.
+
+3.
+
