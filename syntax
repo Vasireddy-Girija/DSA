@@ -27,3 +27,9 @@ q.add() //Adds at the back of queue.
 q.poll() - returns front element.
 
 Stack - Last In First Out (LIFO)
+
+Pair -
+import javafx.util.Pair;
+Pair<Integer, Integer> pair = new Pair(1, 2);
+pair.getKey();
+pair.getValue();
