@@ -1,0 +1,65 @@
+in-degree - number of edges coming to that node.
+Total number of in-degree for un-directed graph - 2*E
+Total number of in-degree for directed graph - E
+A graph can have multiple connected components.
+
+Store graphs -
+adjacency matrix - int[V][V]
+adjacency list - List<List<Integer>>
+
+Traversal- We need visited arrays for both directed & un-directed traversals.
+BFS - O(V+2E) for un-directed and O(V+E) for directed graphs.
+public void bfs(int node, List<List<Integer>> adj, boolean[] visited){
+        Queue<Integer> q = new LinkedList<>();
+        q.add(node);
+        visited[node] = true;
+        while(!q.isEmpty()){
+            int front = q.poll();
+            for(int element : adj.get(front)){
+                if(!visited[element]){
+                    visited[element] = true;
+                    q.add(element);
+                }
+            }
+        }
+    }
+
+DFS - O(V+2E) for un-directed and O(V+E) for directed graphs.
+public void dfs(int node, List<List<Integer>> adj, boolean[] visited){
+        visited[node] = true;
+        for(int element : adj.get(node)){
+            if(!visited[element]){
+                dfs(element, adj, visited);
+            }
+        }
+    }
+
+########################################################################################################################
+Cycle detection -
+1.Undirected graph (same parent)-
+BFS - In queue, store (node, parent) //If it is already visited, then it should be from its parent.
+public boolean detectCycle(int node, ArrayList<ArrayList<Integer>> adj, boolean[] visited){
+        Queue<List<Integer>> q = new LinkedList<>();
+        q.add(new ArrayList<>(Arrays.asList(node, -1)));
+        visited[node] = true;
+        
+        while(!q.isEmpty()){
+            List<Integer> currPair = q.poll();
+            int currNode = currPair.get(0);
+            int currParent = currPair.get(1);
+            
+            for(int element: adj.get(currNode)){
+                if(!visited[element]){
+                    visited[element] = true;
+                    q.add(new ArrayList<>(Arrays.asList(element, currNode)));
+                }else{
+                    if(element != currParent){
+                        return true;
+                    }
+                }
+            }
+        }
+        return false;
+    }
+
+2.Directed graph (same path)-
