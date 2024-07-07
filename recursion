@@ -4,8 +4,60 @@ Three types -
 3.Check if this is possible or not (true/ false) 
 
 *All subsequence problems can be solved using recursion.
+*Subsets are subsequences where order need not be maintained.
 *recursion is a bottom-up approach. Convert all problems to handle with indexes. Base condition - if index reaches n(array length), then return accordingly.
 
 Base conditions - Check if we can have either or both base conditions while solving the problem.
 a)Condition which is not possible.
 b)Condition which is least possible.
+
+Subset Sum -
+1.Given a list arr of n integers, return sums of all subsets in it. Output sums can be printed in any order.
+Sol:
+f(ind, sum ,arr){
+  if(ind == n) ans.add(sum);
+  sum += arr[ind];
+  f(ind+1, sum);
+  sum -= arr[ind];
+  f(ind+1, sum);
+}
+##################################################################################################
+Combination Sum -
+1. Input: candidates = [2,3,6,7], target = 7
+Output: [[2,2,3],[7]]
+Output unique combinations and each element can be taken any number of times.
+Sol :
+f(ind, ans, subAns, sum, arr){
+  if(sum == k){
+    ans.add(new ArrayList<>(subAns)); // make a new copy of subAns other wise ans will contain same result multiple times.
+    return;
+  }
+  if(ind == n) return;
+  if(sum > k) return;
+  
+  subAns.add(arr[ind]);
+  sum += arr[ind];
+  f(ind, ans, subAns, sum, arr); //Since we can take the element again, don't increase ind. This includes all combos of taking it once and more than once.
+  
+  subAns.remove(subAns.size()-1); //remove the last element.
+  sum -= arr[ind]
+  f(ind+1, ans, subAns, sum,arr); //This includes case we don't take the element at all. So increase ind by 1.
+}
+
+2.Input: candidates = [10,1,2,7,6,1,5], target = 8
+Output: 
+[
+[1,1,6],
+[1,2,5],
+[1,7],
+[2,6]
+]
+Here, each element should be only used once.
+Sol: 
+subAns.add(arr[ind]);
+sum += arr[ind];
+f(ind+1, subAns, sum); //increment index as we take element only once.
+subAns.remove(subAns.size()-1);
+sum -= arr[ind];
+f(ind+1, subAns, sum); //increment index as we don't take the element.
+
