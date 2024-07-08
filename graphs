@@ -84,3 +84,22 @@ DFS -
     }
 
 2.Directed graph (same path)-
+DFS-
+public boolean dfs(int node, ArrayList<ArrayList<Integer>> adj, boolean[] visited, boolean[] path){
+        visited[node] = true;
+        path[node] = true;
+        for(int element : adj.get(node)){
+            if(!visited[element]){
+                if(dfs(element, adj, visited, path)) return true;
+            }else{
+                if(path[element]) return true;
+            }
+        }
+        path[node] = false;
+        return false;
+    }
+BFS - can be done using topological sort.
+
+########################################################################################################################
+Topological sort - Possible only for directed acyclic graphs.
+DFS - What if we do a topo sort for directed cyclic graph? We get wrong topo sort order.
