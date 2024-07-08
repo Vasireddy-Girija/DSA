@@ -43,7 +43,7 @@ public void dfs(int node, List<List<Integer>> adj, boolean[] visited){
     }
 
 ########################################################################################################################
-Cycle detection -
+Cycle detection - works for self-loops as well.
 1.Undirected graph (same parent)-
 BFS - In queue, store (node, parent) //If it is already visited, then it should be from its parent.
 public boolean detectCycle(int node, ArrayList<ArrayList<Integer>> adj, boolean[] visited){
@@ -103,3 +103,14 @@ BFS - can be done using topological sort.
 ########################################################################################################################
 Topological sort - Possible only for directed acyclic graphs.
 DFS - What if we do a topo sort for directed cyclic graph? We get wrong topo sort order.
+
+########################################################################################################################
+Dijkstra - 
+Doesn't work for a graph with -ve edges.
+It gives TLE(keeps on running) if Dijkstra has -ve cycles.
+
+Bellman Ford algo -
+Applicable only for Directed graph. If we have undirected graph, convert to directed graph.
+It helpsto find -ve cycles.
+
+Floyd Warshall -
