@@ -7,6 +7,14 @@ Store graphs -
 adjacency matrix - int[V][V]
 adjacency list - List<List<Integer>>
 
+Components - Graphs that are not connected. Always do the traversals for all components.
+Ex:
+for(int i=0; i<v; i++){
+     if(!visited[i]){
+        bfs(node, adj, visisted); //marks visited array for all nodes of a conected graph if called once.
+     }
+}
+
 Traversal- We need visited arrays for both directed & un-directed traversals.
 BFS - O(V+2E) for un-directed and O(V+E) for directed graphs.
 public void bfs(int node, List<List<Integer>> adj, boolean[] visited){
@@ -57,6 +65,19 @@ public boolean detectCycle(int node, ArrayList<ArrayList<Integer>> adj, boolean[
                         return true;
                     }
                 }
+            }
+        }
+        return false;
+    }
+
+DFS -
+ public boolean dfs(int node, int parent, ArrayList<ArrayList<Integer>> adj, boolean[] visited){
+        visited[node] = true;
+        for(int element : adj.get(node)){
+            if(!visited[element]){
+                if(dfs(element, node, adj, visited)) return true;
+            }else{
+                if(element != parent) return true;
             }
         }
         return false;
