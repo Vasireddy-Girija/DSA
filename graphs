@@ -115,6 +115,7 @@ public void dfs(int node, ArrayList<ArrayList<Integer>> adj, boolean[] visited, 
 
 BFS - Use in_degree array - if indegree is 0, then mark it visited and put in the queue.
 *If len(topoSort) != V, then the graph has cycle.
+*Multiple components not required as indegree will handle it and put in the queue in the beginning.
 static int[] bfs_topoSort(int V, int[] indegree, ArrayList<ArrayList<Integer>> adj){
         Queue<Integer> q = new LinkedList<>();
         boolean[] visited = new boolean[V];
@@ -152,3 +153,6 @@ Applicable only for Directed graph. If we have undirected graph, convert to dire
 It helpsto find -ve cycles.
 
 Floyd Warshall -
+Applicable only for Directed graph. If we have undirected graph, convert to directed graph.
+It helpsto find -ve cycles.
+We get s
