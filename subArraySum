@@ -1,0 +1,12 @@
+2 types -
+1.Find longest subArray whose sum = k 
+2.Find count of subArrays whose sum = k
+
+How to solve it depends on the range of array values.
+case-1: if array values are positive (>0)
+case-2: if array values are positive and 0
+case-3: if array values are posives, 0, negatives
+
+case-1: sliding window two pointer
+case-2: sliding window two pointer - calculate for <=k and <=k-1
+case-3: Take map. Take map with val & count 
