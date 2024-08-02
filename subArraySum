@@ -5,8 +5,14 @@
 How to solve it depends on the range of array values.
 case-1: if array values are positive (>0)
 case-2: if array values are positive and 0
-case-3: if array values are posives, 0, negatives
+case-3: if array values are positives, 0, negatives
 
 case-1: sliding window two pointer
 case-2: sliding window two pointer - calculate for <=k and <=k-1
 case-3: Take map. Take map with val & count 
+
+
+#####
+Find length of subArray with max. sum - Kadane's algorithm 
+If all positives and zeroes, total sum of array is the max sum
+
