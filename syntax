@@ -38,3 +38,11 @@ import javafx.util.Pair;
 Pair<Integer, Integer> pair = new Pair(1, 2);
 pair.getKey();
 pair.getValue();
+
+Convert char array to String - 
+char[] chArray = new char[n];
+String str = new String(chArray);
+String str = String.valueOf(chArray);
+Convert List of Character to String -
+Convert String to char array -
+char[] chArray = str.toCharArray();
