@@ -31,5 +31,9 @@ Element after pivot element should be greater than pivot element.
 5.Merge sort - Divide the array into 2 halves hypothetically and sort them and combine the two parts.
 
 Java
-Arrays.sort(arr) -> Sorts arr in ascending order
 Collections.sort(lst) -> Sorts lst in ascending order
+Collections.sort(lst, Collections.reverseOrder()) -> Sorts lst in descending order
+Arrays.sort(arr) -> Sorts arr in ascending order, primitive or non-primitive it works.
+Arrays.sort(arr, Collections.reverseOrder()) -> Works only for non-primitives.
+For primitives values to sort, sort in descending oder and write a reverse method (OR) 
+convert primitive(int) arr to non-primitive(Integer) arr and use Arrays.sort with comparator
