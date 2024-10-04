@@ -3,8 +3,17 @@ complete binary tree
 parent - i, left child - 2*i+1, right child - 2*i+2
 parent for child i - (i-1)/2
 operations - shiftUp, shiftDown(heapify), insert, extractMin, extractMax, delete, heapSort, createHeap
+leaf nodes - (n-2)/2 to n-1 (check this)
 
-Priority Queue - used to implement heaps
+Priority Queue - used to implement heaps (by default, it is a minHeap)
 PriorityQueue<Integer> pq = new PriorityQueue<>();
 PriorityQueue<Integer> pq = new PriorityQueue<>(int capacity);
 PriorityQueue<Integer> pq = new PriorityQueue<>(int capacity, Comparator);
+
+reverse Order -
+PriorityQueue<Integer> pq = new PriorityQueue<>(Collections.reverseOrder());
+PriorityQueue<Integer> pq = new PriorityQueue<>((a, b)->(b-a));
+To create a minheap from all elements of arr[], add all elements to priorityQueue. To make a maxHeap, add -ve of all elements to priorityQueue. 
+
+kth smallest/ largest number in an array, in a stream
+median in an array, in a stream (median of odd numbers is at index n/2, median of even numbers is at index n/2, n/2+1)
