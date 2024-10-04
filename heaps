@@ -1,0 +1,10 @@
+heaps - minHeap, maxHeap
+complete binary tree
+parent - i, left child - 2*i+1, right child - 2*i+2
+parent for child i - (i-1)/2
+operations - shiftUp, shiftDown(heapify), insert, extractMin, extractMax, delete, heapSort, createHeap
+
+Priority Queue - used to implement heaps
+PriorityQueue<Integer> pq = new PriorityQueue<>();
+PriorityQueue<Integer> pq = new PriorityQueue<>(int capacity);
+PriorityQueue<Integer> pq = new PriorityQueue<>(int capacity, Comparator);
