@@ -1,0 +1,10 @@
+How to take pivot - Choose pivot such that actual position of pivot lies in between the start and end index.
+1.Take first element
+2.Take last element
+3.Take random element
+4.Take median of medians (Make set of arrays of 5 elements, get median of all medians and set it as pivot element, to make sure pivot doesn't lie at the end)
+
+Find partitionIndex
+
+
+Time Complexities
