@@ -18,6 +18,7 @@ map.containsKey(key);
 map.putIfAbsent(key, value); //If key is already present, then it will not do anything.
 map.put(key, value);
 map.get(key); // Always check if key is present in map and then use map.get(key);
+map.getOrDefault(key, defaultValue); //if key is present, it gives value of key, otherwise it gives default value.
 
 Queue - First In Last Out data structure (FIFO)
 Queue q = new LinkedList<>();
