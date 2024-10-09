@@ -1,3 +1,7 @@
+Number of edges of un-directed graph with n nodes - n*(n-1)/2
+how many undirected graphs (not necessarily connected) can be constructed out of a given n number of vertices - Math.pow(2, n*(n-1)/2)
+All combination of edges(select 2 edges out of k edges so on), which is 2 power k, where k=n*(n-1)/2
+
 in-degree - number of edges coming to that node.
 Total number of in-degree for un-directed graph - 2*E
 Total number of in-degree for directed graph - E
@@ -144,15 +148,76 @@ static int[] bfs_topoSort(int V, int[] indegree, ArrayList<ArrayList<Integer>> a
         return topSort;
     }
 ########################################################################################################################
-Dijkstra - 
+adjacency list for weighted graph - u -> ({v, wt}, {w, wt})
+dst[src] = 0
+
+For shortest paths, visited array is not needed. We will iterate till queue is empty.
+Shortest path of Undirected graph with unit weights - Use a queue (put [node,dst] in queue), dst array
+Shortest path of Undirected graph with non-negative weights - 
+     Use a priority queue (put [dst from src node, node]), dst array.
+     We can use queue. But it will take multiple iterations.
+Shortest path of directed acyclic graph (DAG) - Find topo sort, and based on topo sort, update dst array.
+
+Dijkstra (works for directed, undirected, positive cycle graphs- 
 Doesn't work for a graph with -ve edges.
+     Doesn't work for undirected -ve edges as it will give TLE.
+     Does it work for directed -ve edges ?
 It gives TLE(keeps on running) if Dijkstra has -ve cycles.
+Time complexity of Dijkstra - ElogV 
+Start Dijkstra with a priority queue to store [dst from src node, node] in ascending order. Start with (0, src) in priority queue
+and iteratite till it becomes empty.
 
-Bellman Ford algo -
-Applicable only for Directed graph. If we have undirected graph, convert to directed graph.
-It helpsto find -ve cycles.
+relaxation of edges - edge form u -> v with weight wt
+if(dist[v] > dist[u]+wt]), then dist[v]=dist[u]+wt;
 
-Floyd Warshall -
+Bellman Ford algo - TC - O(V*E)
 Applicable only for Directed graph. If we have undirected graph, convert to directed graph.
-It helpsto find -ve cycles.
-We get s
+It helps to find -ve cycles.
+Run a loop of V-1 times for all edges. If distance array changes Vth time also, then graph has a -ve cycle.
+Why V-1 ? For a graph with V vertices, max edges between 2 vertices can be V-1. Also, max edges for shortest path can be V-1.
+Edges in bellman ford can be of any order. If src vertex is 0 and edges corresponding to 0th vertex are in the last, we will need V-1 iterations.
+Since edges can be in any order, relaxation of edges will be -
+if(dist[u] != 1e9 and dist[v] > dist[u]+wt]), then dist[v]=dist[u]+wt; //not guaranteed that we visited u before visting v.
+for(int i=0; i<V-1; i++){
+     for(int[] edge: edges){
+          ...
+     }
+}
+
+Floyd Warshall - TC - O(V*V*V)
+Applicable only for Directed graph. If we have undirected graph, convert to directed graph.
+It helps to find -ve cycles.
+Dijkstra and Bellman ford - shortest path from single node src to every other node.
+Floyd Warshall - shortest path from each node to every other node.
+Create a wt matrix - (u, u) -> 0, (u, v) -> wt if it exists. (u, v) -> inf if u->v doesn't exist.
+for(int via=0; via<V; via++){
+     for(int i=0; i<n; i++){
+          for(int j=0; j<V; j++){
+               cost[i][j] = Math.min(cost[i][j], cost[i][via]+cost[via][j]);
+          }
+     }
+}
+How to detect negative cycles - After the loop, if any wt from u to u is -ve, then it has -ve cycle.
+for(int i=0; i<V; i++){
+     if(cost[i][i] <0){
+          return true;
+}
+
+If we want to use Dijkstra for each node instead of floyd warshall, we need to ensure that graph doesn't have -ve cycle. 
+Otherwise we get TLE. TC would be V*E*LogV (E can be max of V*V).
+########################################################################################################################
+
+Minimum spanning tree - MST (Undirected weighted graph) with N nodes and M edges.
+Spanning Tree - A graph with N nodes and N-1 edges where all nodes are reachable from each other.
+Spanning tree with least edge sum is called minimum spanning tree.
+
+Prim's algorithm (Greedy)- TC - ElogE
+We need a priority queue to store (wt, node, parent), visited array, MST to store edges like (u,v), sum.
+Store parent in priority queue only if we want to create MST array. Otherwise parent is not needed in priority Queue.
+Start with (0, 0, -1) in priority queue. 
+Mark a node visited only when we remove it from priority queue. 
+Add to MST when we remove it from priority queue and it is already not visited. If it is not visited, add it to MST. Don't add 
+Put in priority queue only if node is not visited.
+
+Disjoint set -
+
