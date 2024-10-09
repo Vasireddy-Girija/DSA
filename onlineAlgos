@@ -2,3 +2,5 @@ sorting - insertion sort
 median - heaps
 kth smallest/ largest - heaps
 min of set of numbers where we add and remove elements - minStack, minHeap
+Disjoint set - graphs (check if 2 vertices belong to same component)
+Trie - check if a word is present or prefix is present or number of words with given prefix
