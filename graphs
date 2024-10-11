@@ -183,6 +183,32 @@ for(int i=0; i<V-1; i++){
           ...
      }
 }
+static int[] bellman_ford(int V, ArrayList<ArrayList<Integer>> edges, int S) {
+        // Write your code here
+        int[] dist = new int[V];
+        int maxVal = (int)1e8;
+        Arrays.fill(dist, maxVal);
+        dist[S] = 0;
+        for(int i=0; i<V-1; i++){
+            for(ArrayList<Integer> edge: edges){
+               //check if dist[u] is maxVal before updating it, as it might get updated for -ve edges.
+                if(dist[edge.get(0)] != maxVal && dist[edge.get(1)] > dist[edge.get(0)]+edge.get(2)){
+                    dist[edge.get(1)] = dist[edge.get(0)]+edge.get(2);
+                }
+            }
+        }
+        boolean negativeCycle = false;
+        for(ArrayList<Integer> edge: edges){
+            if(dist[edge.get(0)] != maxVal && dist[edge.get(1)] > dist[edge.get(0)]+edge.get(2)){
+                negativeCycle = true;
+                break;
+            }
+        }
+        if(negativeCycle){
+            return new int[]{-1};
+        }
+        return dist;
+    }
 
 Floyd Warshall - TC - O(V*V*V)
 Applicable only for Directed graph. If we have undirected graph, convert to directed graph.
@@ -205,8 +231,8 @@ for(int i=0; i<V; i++){
 
 If we want to use Dijkstra for each node instead of floyd warshall, we need to ensure that graph doesn't have -ve cycle. 
 Otherwise we get TLE. TC would be V*E*LogV (E can be max of V*V).
-########################################################################################################################
 
+########################################################################################################################
 Minimum spanning tree - MST (Undirected weighted graph) with N nodes and M edges.
 Spanning Tree - A graph with N nodes and N-1 edges where all nodes are reachable from each other.
 Spanning tree with least edge sum is called minimum spanning tree.
@@ -215,9 +241,171 @@ Prim's algorithm (Greedy)- TC - ElogE
 We need a priority queue to store (wt, node, parent), visited array, MST to store edges like (u,v), sum.
 Store parent in priority queue only if we want to create MST array. Otherwise parent is not needed in priority Queue.
 Start with (0, 0, -1) in priority queue. 
-Mark a node visited only when we remove it from priority queue. 
+IMP - Mark a node visited only when we remove it from priority queue. 
 Add to MST when we remove it from priority queue and it is already not visited. If it is not visited, add it to MST. Don't add 
 Put in priority queue only if node is not visited.
 
-Disjoint set -
+static int spanningTree(int V, int E, List<List<int[]>> adj) {
+        List<List<Integer>> MST = new ArrayList<>();
+        int minSpanningSum = 0;
+        int[] visited = new int[V];
+
+        PriorityQueue<List<Integer>> pq = new PriorityQueue<>((a,b)->(a.get(0)-b.get(0)));
+        pq.add(new ArrayList<>(Arrays.asList(0,0,-1))); //(wt, node, parent for MST)
+
+        while(!pq.isEmpty()){
+            List<Integer> top = pq.poll();
+            int wt = top.get(0);
+            int u = top.get(1);
+            int parent = top.get(2);
+            if(visited[u] != 1){
+                visited[u] = 1;
+                if(parent != -1){
+                    MST.add(new ArrayList<>(Arrays.asList(u, parent)));
+                    minSpanningSum += wt;
+                }
+                for(int[] neigh : adj.get(u)){
+                    int v = neigh[0];
+                    int v_wt = neigh[1];
+                    if(visited[v] != 1){
+                        pq.add(new ArrayList<>(Arrays.asList(v_wt, v, u)));
+                    }
+                }
+            }
+        }
+        return minSpanningSum;
+    }
+########################################################################################################################
+Disjoint set - Online algo, where if we are given 2 nodes, we should say if they belong to same component in almost constant time.
+TC to create disjoint set - O(V)
+union(u, v) - mark an edge from u to v. (for undirected graphs)
+If ultimate parent of u and v are same, then u & v belong to same component.
+While getting ultimate parent, do path compression so that we can get ultimate parent in constant time, 
+otherwise it will take logN time to get ultimate parent.
+
+We can create Disjoint set by - rank, size
+rank - rank is more if size of the component is more.
+size - total number of nodes in the component.
+
+In the union by rank method, why do we need to connect the smaller rank to the larger rank?
+shrinking the height of the graph and reducing the time complexity as much as we can so that we can find untimate prent in lesser time.
+
+class DisjointSet {
+    List<Integer> rank = new ArrayList<>();
+    List<Integer> parent = new ArrayList<>();
+    List<Integer> size = new ArrayList<>();
+    public DisjointSet(int n) {
+       //Take n+1 values, so taht it works for 0 and 1 based indexing graphs.
+       for (int i = 0; i <= n; i++) {
+            rank.add(0);
+            parent.add(i);
+            size.add(1);
+        }
+    }
+
+    public int findUPar(int node) {
+        if (node == parent.get(node)) {
+            return node;
+        }
+        int ulp = findUPar(parent.get(node));
+        parent.set(node, ulp);
+        return parent.get(node);
+    }
+
+    public void unionByRank(int u, int v) {
+        int ulp_u = findUPar(u);
+        int ulp_v = findUPar(v);
+        if (ulp_u == ulp_v) return;
+        if (rank.get(ulp_u) < rank.get(ulp_v)) {
+            parent.set(ulp_u, ulp_v);
+        } else if (rank.get(ulp_v) < rank.get(ulp_u)) {
+            parent.set(ulp_v, ulp_u);
+        } else {
+            parent.set(ulp_v, ulp_u);
+            int rankU = rank.get(ulp_u);
+            rank.set(ulp_u, rankU + 1);
+        }
+    }
+
+    public void unionBySize(int u, int v) {
+        int ulp_u = findUPar(u);
+        int ulp_v = findUPar(v);
+        if (ulp_u == ulp_v) return;
+        if (size.get(ulp_u) < size.get(ulp_v)) {
+            parent.set(ulp_u, ulp_v);
+            size.set(ulp_v, size.get(ulp_v) + size.get(ulp_u));
+        } else {
+            parent.set(ulp_v, ulp_u);
+            size.set(ulp_u, size.get(ulp_u) + size.get(ulp_v));
+        }
+    }
+}
+
+Krushkal's algo - O(ElogE + V)
+Sort all edge weights. Try not taking priority queue as we are not adding any new edges to priority queue as we continue the algo.
+Start creating spanningTree by taking min edge and keep on creating disjoint set. 
+If for any edge, if u & v belong to same component, then don't add it to MST as it is already present in the graph.
+
+class Edge implements Comparable<Edge> {
+    int src, dest, weight;
+    Edge(int _src, int _dest, int _wt) {
+        this.src = _src; this.dest = _dest; this.weight = _wt;
+    }
+    // Comparator function used for
+    // sorting edgesbased on their weight
+    public int compareTo(Edge compareEdge) {
+        return this.weight - compareEdge.weight;
+    }
+};
+
+class Solution {
+    //Function to find sum of weights of edges of the Minimum Spanning Tree.
+    static int spanningTree(int V,
+                            ArrayList<ArrayList<ArrayList<Integer>>> adj) {
+        List<Edge> edges = new ArrayList<Edge>();
+        // O(N + E)
+        for (int i = 0; i < V; i++) {
+            for (int j = 0; j < adj.get(i).size(); j++) {
+                int adjNode = adj.get(i).get(j).get(0);
+                int wt = adj.get(i).get(j).get(1);
+                int node = i;
+                Edge temp = new Edge(i, adjNode, wt);
+                edges.add(temp);
+            }
+        }
+        DisjointSet ds = new DisjointSet(V);
+        // M log M
+        Collections.sort(edges);
+        int mstWt = 0;
+        // M x 4 x alpha x 2
+        for (int i = 0; i < edges.size(); i++) {
+            int wt = edges.get(i).weight;
+            int u = edges.get(i).src;
+            int v = edges.get(i).dest;
+
+            if (ds.findUPar(u) != ds.findUPar(v)) {
+                mstWt += wt;
+                ds.unionBySize(u, v);
+            }
+        }
+
+        return mstWt;
+    }
+}
+########################################################################################################################
+Strongly connected components SCC (Kosaraju's Algorithm) - O(V+E)
+Directed Graph (Each node of a strongly connected component can go every other node of the component)
+Sort all the nodes according to their finishing time - First element of top sort's stack.
+Reverse all the edges of the entire graph
+Perform the DFS and count the no. of different DFS calls to get the no. of SCC
+
+########################################################################################################################
+Bridges in graph -
+A critical connection/ bridge is a connection that, if removed, will make some nodes unable to reach some other nodes.
+If we remove that edge, it divides the graph into multiple components.
+
+
+
+########################################################################################################################
+Articulation points - 
 
