@@ -11,6 +11,19 @@ Base conditions - Check if we can have either or both base conditions while solv
 a)Condition which is not possible.
 b)Condition which is least possible.
 
+Find power set/ all subsets/ all sub-sequences -
+For an arr of size n, power set will have pow(2, n) elements including empty arr.
+public void powerSet(int[] nums, int idx, List<List<Integer>> ans, List<Integer> subAns){
+        if(idx == nums.length){
+            ans.add(new ArrayList<>(subAns));
+            return;
+        }
+        subAns.add(nums[idx]);
+        recFunc(nums, idx+1, ans, subAns);
+        subAns.remove(subAns.size()-1);
+        recFunc(nums, idx+1, ans, subAns);
+    }
+
 Subset Sum -
 1.Given a list arr of n integers, return sums of all subsets in it. Output sums can be printed in any order.
 Sol:
