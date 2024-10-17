@@ -1,0 +1,7 @@
+Fast and Slow pointers -
+1.Find if linked list has a cycle.
+2.Find mid element of linked list
+3.Find cyclic patterns in array - example : Find happy number - If Sum of square of a number comes to 1, then it is a happy number
+
+
+Kth smallest/ largest/ frequent elements - Use heap.
