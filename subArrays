@@ -1,1 +1,41 @@
+n elements, each subarray of length k, we get (n-k+1) sub-arrays.
 
+Find subarays of size k in an array of len n. Find max of each sub-array and add it in a list and return the list.
+Brute force - TC - O(n-k)*n
+class Solution {
+    public int[] maxSlidingWindow(int[] nums, int k) {
+        int n = nums.length;
+        int[] ans = new int[n-k+1];
+        for(int i=0; i<n-k+1; i++){
+            int maxVal = nums[i];
+            for(int j=i; j<i+k; j++){
+                maxVal = Math.max(maxVal, nums[j]);
+            }
+            ans[i] = maxVal;
+        }
+        return ans;
+    }
+}
+Optimised - TC - O(2N)
+Take a deque as we will have to remove elements from front and back.
+1.Have max k elements in deque. Remaining, remove it from front.
+2.Maintain a monotonic stack - since we have to find max, we should have a monotonic decreasing stack.
+3.First element each time ill be the max value of k-elements.
+class Solution {
+    public int[] maxSlidingWindow(int[] nums, int k) {
+        int n= nums.length;
+        int[] ans = new int[n-k+1];
+        Deque<Integer> deq = new ArrayDeque<>();
+        for(int i=0; i<n; i++){
+            while(!deq.isEmpty() && deq.getFirst()<=i-k){
+                deq.pollFirst();
+            }
+            while(!deq.isEmpty() && nums[deq.getLast()]<=nums[i]){
+                deq.pollLast();
+            }
+            deq.addLast(i);
+            if(i>=k-1) ans[i-k+1]=nums[deq.getFirst()];
+        }
+        return ans;
+    }
+}
