@@ -1,1 +1,48 @@
+elements in array are continuous
+elements in linked lists are non-continuous
 
+class Node{
+  int data;
+  Node next;
+  Node(int data, Node next){
+    this.data = data;
+    this.next = next;
+  }
+}
+base case - if(head==null) return;
+
+Search for an element - O(n)
+Length of linked list - O(n)
+
+Delete head - O(1) head=head.next;
+Delete tail - O(n)
+  if(head==null || head.next==null) return null;
+  Node temp = head;
+  while(temp.next.next!=null){
+      temp = temp.next;
+  }
+  temp.next = null;
+Delete kth element - O(k)
+  if(k==1){
+    head = head.next;
+    return head;
+  }
+  Node temp = head; Node prev=null;
+  int cnt=1;
+  while(temp != null){
+    if(cnt == k){
+        prev.next = temp.next;
+        return head;
+    }
+    prev = temp;
+    temp = temp.next;
+    cnt += 1;
+  }
+  return head;
+Delete element val - O(n)
+
+Insert head - O(1) return head = new Node(data, head);
+Insert tail - O(n)
+if(head == null) return head=new Node(data, head);
+
+  
