@@ -45,6 +45,8 @@ Delete kth element - O(k)
 
 Delete element val - O(n) - same as above
 
+Delete middle element - Find middle element by using fast, slow pointers.
+
 ############################################################################################
 Insert head - O(1) return head = new Node(data);
 
@@ -81,3 +83,34 @@ if(cnt == k){
 return head;
 
 ############################################################################################
+Reverse a linked list -
+
+############################################################################################
+Tortoise-hare method -
+1.Find middle element in a linked list
+class Solution {
+    public ListNode middleNode(ListNode head) {
+        ListNode fast = head;
+        ListNode slow = head;
+        while(fast!=null && fast.next!=null){
+            fast = fast.next.next;
+            slow = slow.next;
+        }
+        return slow;
+    }
+}
+
+2.Check if there is a cycle in linked-list
+public class Solution {
+    public boolean hasCycle(ListNode head) {
+        ListNode slow = head;
+        ListNode fast = head;
+        while(fast != null && fast.next != null){
+            fast = fast.next.next;
+            slow = slow.next;
+            if(slow == fast) return true;
+        }
+        return false;
+    }
+}
+
