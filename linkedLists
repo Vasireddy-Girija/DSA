@@ -84,7 +84,23 @@ return head;
 
 ############################################################################################
 Reverse a linked list -
+Iterative - Point curr.next to prev, before that keep saving curr.next.
+class Solution {
+    public ListNode reverseList(ListNode head) {
+        if(head==null || head.next==null) return head;
+        ListNode prev=null;
+        ListNode curr=head;
+        while(curr != null){
+            ListNode next = curr.next;
+            curr.next = prev;
+            prev = curr;
+            curr = next;
+        }
+        return prev;
+    }
+}
 
+Sort a linked list -
 ############################################################################################
 Tortoise-hare method -
 1.Find middle element in a linked list
@@ -114,3 +130,56 @@ public class Solution {
     }
 }
 
+3.Find length of loop - 
+We should need one Node which is part of loop. Once we get it, iterate till we get it to count.
+How to get one element from loop - slow == fas, slow will be one element in a loop.
+class Solution {
+    public int countNodesinLoop(Node head) {
+        Node slow = head;
+        Node fast = head;
+        while(fast!=null && fast.next!=null){
+            fast = fast.next.next;
+            slow = slow.next;
+            if(fast == slow) break;
+        }
+        if(fast==null || fast.next==null) return 0;
+        int cnt=1;
+        Node next = fast.next;
+        while(next != slow){
+            cnt += 1;
+            next = next.next;
+        }
+        return cnt;
+    }
+}
+
+4.Find starting point of loop - 
+How ? 
+a)find slow == fast pointer. Set slow pointer to head and pointer. Now move slow and fast poiner by one step. 
+When slow and fast pointer meets again, that will be starting point.
+Intuition -
+Let length from head to startPoint of loop be l.
+When slow pointer moves l, fast pointer moves 2l, out of which l is inside loop.
+Let the total distance of loop - l+d.
+After this step, for each turn, slow moves 1 pointer and fast moves 2 pointers. Difference between slow and fast will be d-1.
+After d steps, they'll meet.
+Now slow and fast pointer will be d steps from starting point.
+public class Solution {
+    public ListNode startNode(ListNode head) {
+        ListNode fast = head;
+        ListNode slow = head;
+        while(fast != null && fast.next != null){
+            fast = fast.next.next;
+            slow = slow.next;
+            if(fast == slow){
+                slow = head;
+                while(fast != slow){
+                    slow = slow.next;
+                    fast = fast.next;
+                }
+                return slow;
+            }
+        }
+        return null;
+    }
+}
