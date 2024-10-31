@@ -65,6 +65,123 @@ f(ind, prev_ind){
 f(0, -1)
 
 O(N*N) solution -
+class Solution {
+    public int lengthOfLIS(int[] nums) {
+        int n = nums.length;
+        if(n==0 || n==1) return n; 
+        int[] dp = new int[n];
+        int maxVal = 1;
+        Arrays.fill(dp, 1);
+        for(int i=1; i<n; i++){
+            for(int j=0; j<i; j++){
+                if(nums[i]>nums[j]){
+                    dp[i] = Math.max(dp[i], 1+dp[j]);
+                }
+            }
+            maxVal = Math.max(maxVal, dp[i]);
+        }
+        return maxVal;
+    }
+}
+
+print LIS - Take an array idx and initialise with corresponding index. Stop when idx[i]==i.
+class Solution {
+    public ArrayList<Integer> longestIncreasingSubsequence(int n, int arr[]) {
+        int[] dp = new int[n];
+        int[] idx = new int[n];
+        int maxValIdx = 0;
+        int maxVal = 1;
+        Arrays.fill(dp, 1);
+        for(int i=0; i<n; i++) idx[i]=i;
+        for(int i=1; i<n; i++){
+            for(int j=0; j<i; j++){
+                if(arr[i]>arr[j] && dp[i]<=dp[j]){
+                    dp[i] = dp[j]+1;
+                    idx[i] = j;
+                }
+            }
+            if(dp[i]>maxVal){
+                maxVal = dp[i];
+                maxValIdx = i;
+            }
+        }
+        ArrayList<Integer> ans = new ArrayList<>();
+        ans.add(arr[maxValIdx]);
+        while(idx[maxValIdx] != maxValIdx){
+            maxValIdx = idx[maxValIdx];
+            ans.add(arr[maxValIdx]);
+        }
+        Collections.reverse(ans);
+        return ans;
+    }
+}
+
+LIS using binary search - O(nlogn) - Used only to find length and not sub-sequence.
+
+Largest Divisble Subset -
+Given a set of distinct positive integers nums, return the largest subset answer such that every pair (answer[i], answer[j]) of elements in this subset satisfies:
+answer[i] % answer[j] == 0, or answer[j] % answer[i] == 0
+Sort the arr and perform LIS with logic arr[i]%arr[j]==0 && dp[i]<=dp[j], then dp[i]=dp[j]+1;
+
+Longest String Chain - O(n3)
+Input: words = ["a","b","ba","bca","bda","bdca"]
+Output: 4
+Explanation: One of the longest word chains is ["a","ba","bda","bdca"].
+In the word chain, only one word should be added to its adjacent at any place.
+Comparator<String> comp = (a, b)->a.length()-b.length();
+Arrays.sort(words, comp); // String[] words
+
+public boolean isPredecessor(String word1, String word2){
+    if(word2.length()-word1.length() != 1) return false;
+    int i=0; int j=0; int cnt=0;
+    while(i < word1.length()){
+        if(word1.charAt(i) != word2.charAt(j)){
+            cnt += 1;
+            if(cnt > 1) return false;
+            j += 1;
+            continue;
+        }
+        i += 1;
+        j += 1;
+    }
+    return true;
+}
+
+for(int i=1; i<n; i++){
+    for(int j=0; j<i; j++){
+        if(isPredecessor(words[j], words[i])){
+            dp[i] = Math.max(dp[i], dp[j]+1);
+        }
+    }
+    maxVal = Math.max(maxVal, dp[i]);
+}
+
+Longest Bitonic Sequence - len of increasing sequence + len of decreasing sequence
+If the arr is strictly inc or dec, then return 0.
+int maxVal = 0;
+for(int i=0; i<n; i++){
+    if(dp1[i] == 1 || dp2[i] == 1) continue; //If it is 1, then we don't have any inc or dec seq after that. So excluding it.
+    maxVal = Math.max(maxVal, dp1[i]+dp2[i]-1);
+}
+return maxVal;
+
+Number of longest increasing subsequences - O(n2)
+
+#################################################################################################################
+Buy & Sell Stocks - Buy only once and sell only once. TC-O(n), SC-O(1)
+class Solution {
+    public int maxProfit(int[] prices) {
+        int n = prices.length;
+        int maxProfit = 0;
+        int currMax = prices[n-1];
+        for(int i=n-2; i>=0; i--){
+            currMax = Math.max(prices[i], currMax);
+            maxProfit = Math.max(maxProfit, currMax-prices[i]);
+        }
+        return maxProfit;
+    }
+}
+
 
 #################################################################################################################
 Partition DP -
