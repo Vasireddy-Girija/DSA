@@ -77,3 +77,67 @@ Right/Left View
 ####################################################################################################################
 How to find parent for a binary tree - 
 Map<TreeNode, TreeNode> - map of child & parent.
+
+####################################################################################################################
+Binary Search Trees
+####################################################################################################################
+Inorder Traversal of BST will be in sorted order.
+Search in BST -  Iterative & recursive.
+1.If key is found, return
+2.If root.val < requried, go to right
+3.If root.val > required, go to left
+class Solution {
+    public TreeNode searchBST(TreeNode root, int val) {
+        if(root == null) return null;
+        if(root.val == val) return root;
+        if(root.val > val) return searchBST(root.left, val);
+        return searchBST(root.right, val);
+    }
+}
+class Solution {
+    public TreeNode searchBST(TreeNode root, int val) {
+        while(root != null){
+            if(root.val == val) return root;
+            if(root.val > val) root = root.left;
+            else root = root.right;
+        }
+        return null;
+}
+Min/Max value of BST - left most/ right most elements are min and max respectively.
+class Solution {
+    int minValue(Node root) {
+        while(root.left != null){
+            root = root.left;
+        }
+        return root.data;
+    }
+}
+Find floor, ceil in BST - Similar to searching for element in BST.
+class Tree {
+    int findCeil(Node root, int key) {
+        if (root == null) return -1;
+        int ceil = Integer.MAX_VALUE;
+        while(root != null){
+            if(root.data == key) return key;
+            if(root.data > key){
+                ceil = Math.min(ceil, root.data);
+                root = root.left;
+            }else{
+                root = root.right;
+            }
+        }
+        return ceil==Integer.MAX_VALUE?-1:ceil;
+    }
+}
+Insert element to BST -
+class Solution {
+    public TreeNode insertIntoBST(TreeNode root, int val) {
+        if(root == null) return new TreeNode(val);
+        if(root.val > val){
+            root.left = insertIntoBST(root.left, val);
+        }else{
+            root.right = insertIntoBST(root.right, val);
+        }
+        return root;
+    }
+}
