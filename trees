@@ -67,7 +67,23 @@ public int maxSum(TreeNode root, int[] maxVal){
 }
 Initialise with maxval[0] = Integer.MIN_VALUE, ans will be maxVal[0].
 
+4.Find all paths from root to node.
+public static void paths(Node root, ArrayList<Integer> subAns, ArrayList<ArrayList<Integer>> ansLst){
+    if(root == null) return;
+    subAns.add(root.data);
+    if(root.left == null && root.right == null){
+        ansLst.add(new ArrayList<>(subAns));
+    }
+    if(root.left != null){
+        recFunc(root.left, subAns, ansLst);
+    }
+    if(root.right != null){
+        recFunc(root.right, subAns, ansLst);
+    }
+    subAns.remove(subAns.size()-1);
+}
 ####################################################################################################################
+Type - Get something from left, get something from right and go back to parent.
 Search for a node in Binary tree. Keep returning node if it is found. Else, return null.
 public Node searchNode(Node root, int key){
     if(root == null) return null;
@@ -76,6 +92,17 @@ public Node searchNode(Node root, int key){
     if(left != null) return left;
     Node right = searchNode(root.right, key);
     if(right != null) return right;
+    return null;
+}
+
+LCA of Binary tree.
+public TreeNode lowestCommonAncestor(TreeNode root, TreeNode p, TreeNode q) {
+    if(root == p || root == q || root == null) return root;
+    TreeNode llca = lowestCommonAncestor(root.left, p, q);
+    TreeNode rlca = lowestCommonAncestor(root.right, p, q);
+    if(llca != null && rlca != null) return root;
+    if(llca != null) return llca;
+    if(rlca != null) return rlca;
     return null;
 }
 ####################################################################################################################
@@ -135,6 +162,8 @@ public static void minTime(Node target, int level, Set<Node> visited, Map<Node, 
         minTime(parentMap.get(target), level+1, visited, parentMap, maxLevel);
     }
 }
+####################################################################################################################
+Morris Traversal - O(n) traversal without stack/ recursion. Not including it.
 ####################################################################################################################
 Binary Search Trees
 ####################################################################################################################
