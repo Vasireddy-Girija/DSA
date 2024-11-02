@@ -82,6 +82,8 @@ Map<TreeNode, TreeNode> - map of child & parent.
 Binary Search Trees
 ####################################################################################################################
 Inorder Traversal of BST will be in sorted order.
+To get in reverse sorted order, do right-root-left instead of left-root-right.
+
 Search in BST -  Iterative & recursive.
 1.If key is found, return
 2.If root.val < requried, go to right
@@ -191,3 +193,58 @@ public TreeNode deleteNodeHeightUnbalanced(TreeNode root, int key) {
     }
     return root;
 }
+
+Kth smallest element in BST-
+class Solution {
+    public void inOrder(TreeNode root, int k, int[] cnt, int[] ans){
+        if(root == null) return;
+        if(ans[0] != -1) return;
+        inOrder(root.left, k, cnt, ans);
+        cnt[0] = cnt[0]+1;
+        if(cnt[0] == k){
+            ans[0] = root.val;
+            return;
+        }
+        inOrder(root.right, k, cnt, ans);
+    }
+    public int kthSmallest(TreeNode root, int k) {
+        int[] cnt = new int[1];
+        int[] ans = new int[1];
+        ans[0] = -1;
+        inOrder(root, k, cnt, ans);
+        return ans[0];
+    }
+}
+
+Validate BST -
+1.If inorder is sorted, then it is BST.
+2.If root is more that root.left and less than root.right, and repeating isValidBST for left and right sub-trees will not work.
+Use long instead of int, as val of nodes can be int max or min values.
+class Solution {
+    public boolean isValidBSTWithRange(TreeNode root, long minVal, long maxVal){
+        if(root == null) return true;
+        if(root.val <= minVal || root.val >= maxVal) return false;
+        return isValidBSTWithRange(root.left, minVal, root.val) && isValidBSTWithRange(root.right, root.val, maxVal);
+    }
+    public boolean isValidBST(TreeNode root) {
+        return isValidBSTWithRange(root, Long.MIN_VALUE, Long.MAX_VALUE);
+    }
+}
+
+Lowest Common Ancestor - If root.val >= node1.val and root.val <= node2.val, then root is LCA.
+class Solution {
+    public TreeNode lowestCommonAncestor(TreeNode root, TreeNode p, TreeNode q) {
+        if(root == null) return null;
+        if(root.val >= Math.min(p.val, q.val) && root.val <= Math.max(p.val, q.val)){
+            return root;
+        }
+        if(root.val > Math.max(p.val, q.val)){
+            return lowestCommonAncestor(root.left, p, q);
+        }
+        if(root.val < Math.min(p.val, q.val)){
+            return lowestCommonAncestor(root.right, p, q);
+        }
+        return null;
+    }
+}
+
