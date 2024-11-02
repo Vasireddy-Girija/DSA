@@ -68,6 +68,17 @@ public int maxSum(TreeNode root, int[] maxVal){
 Initialise with maxval[0] = Integer.MIN_VALUE, ans will be maxVal[0].
 
 ####################################################################################################################
+Search for a node in Binary tree. Keep returning node if it is found. Else, return null.
+public Node searchNode(Node root, int key){
+    if(root == null) return null;
+    if(root.data == key) return root;
+    Node left = searchNode(root.left, key);
+    if(left != null) return left;
+    Node right = searchNode(root.right, key);
+    if(right != null) return right;
+    return null;
+}
+####################################################################################################################
 Boundary Traversal
 Vertical order Traversal
 Top View
@@ -108,6 +119,22 @@ public void distanceK(TreeNode root, int level, Set<Integer> visited, Map<TreeNo
             distanceK(parentMap.get(root), level-1, visited, parentMap, ansLst);
         }
     }
+
+min time to burn complete tree -
+public static void minTime(Node target, int level, Set<Node> visited, Map<Node, Node> parentMap, int[] maxLevel){
+    if(target==null) return;
+    visited.add(target);
+    maxLevel[0] = Math.max(maxLevel[0], level);
+    if(target.left != null && !visited.contains(target.left)){
+        minTime(target.left, level+1, visited, parentMap, maxLevel);
+    }
+    if(target.right != null && !visited.contains(target.right)){
+        minTime(target.right, level+1, visited, parentMap, maxLevel);
+    }
+    if(parentMap.get(target) != null && !visited.contains(parentMap.get(target))){
+        minTime(parentMap.get(target), level+1, visited, parentMap, maxLevel);
+    }
+}
 ####################################################################################################################
 Binary Search Trees
 ####################################################################################################################
