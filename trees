@@ -141,3 +141,53 @@ class Solution {
         return root;
     }
 }
+Delete element in BST -
+1.To maintain height. Swap actual value with either successor/ predecessor and delete key by going to root.right/root.left
+2.Height might be very un-balanced. Connect root.right to predecessor and return root.left.
+Conditions to remove node -
+If it is a root node, return null;
+If it has only one child, return root.left or root.right;
+
+public TreeNode deleteNodeHeightBalanced(TreeNode root, int key){
+    if(root == null) return null;
+    if(root.val == key){
+        if(root.left == null && root.right == null) return null;
+        if(root.left == null) return root.right;
+        if(root.right == null) return root.left;
+        TreeNode rightMost = root.left;
+        while(rightMost.right != null){
+            rightMost = rightMost.right;
+        }
+        root.val = rightMost.val;
+        rightMost.val = key;
+        root.left = deleteNodeHeightBalanced(root.left, key);
+        return root;
+    }
+    if(root.val > key){
+        root.left = deleteNodeHeightBalanced(root.left, key);
+    }else{
+        root.right = deleteNodeHeightBalanced(root.right, key);
+    }
+    return root;
+}
+    
+public TreeNode deleteNodeHeightUnbalanced(TreeNode root, int key) {
+    if(root == null) return null;
+    if(root.val == key){
+        if(root.left == null && root.right == null) return null;
+        if(root.left == null) return root.right;
+        if(root.right == null) return root.left;
+        TreeNode rightMost = root.left;
+        while(rightMost.right != null){
+            rightMost = rightMost.right;
+        }
+        rightMost.right = root.right;
+        return root.left;
+    }
+    if(root.val > key){
+        root.left = deleteNodeHeightUnbalanced(root.left, key);
+    }else{
+        root.right = deleteNodeHeightUnbalanced(root.right, key);
+    }
+    return root;
+}
