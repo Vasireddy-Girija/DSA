@@ -83,6 +83,25 @@ public static void paths(Node root, ArrayList<Integer> subAns, ArrayList<ArrayLi
     subAns.remove(subAns.size()-1);
 }
 ####################################################################################################################
+Check if 2 trees are same.
+class Solution {
+    public boolean isSameTree(TreeNode p, TreeNode q) {
+        if(p == null && q == null) return true;
+        if(p==null || q == null) return false;
+        if(p.val != q.val) return false;
+        return isSameTree(p.left, q.left) && isSameTree(p.right, q.right);
+    }
+}
+
+Check if tree is symmetrical. 
+isMirror(root.left, root.right) will be the ans.
+public boolean isMirror(TreeNode node1, TreeNode node2){
+    if(node1==null && node2==null) return true;
+    if(node1==null || node2==null) return false;
+    if(node1.val != node2.val) return false;
+    return isMirror(node1.left, node2.right) && isMirror(node1.right, node2.left);
+}
+####################################################################################################################
 Type - Get something from left, get something from right and go back to parent.
 Search for a node in Binary tree. Keep returning node if it is found. Else, return null.
 public Node searchNode(Node root, int key){
