@@ -1,10 +1,14 @@
-How to take pivot - Choose pivot such that actual position of pivot lies in between the start and end index.
+How to take pivot - Choose pivot such that actual position of pivot lies in between(median) the start and end index.
 1.Take first element
 2.Take last element
 3.Take random element
 4.Take median of medians (Make set of arrays of 5 elements, get median of all medians and set it as pivot element, to make sure pivot doesn't lie at the end)
 
-Find partitionIndex
+Find partitionIndex- for sorting in ascending/increasing order.
+Take pivot as last element. Take 2 pointers i and pivotLow. pivotLow will be at a place where it is greater than pivot element.
+
 
 
 Time Complexities
+1.If we always get partition at middle element, then O(n) is the time complexity.
+2.If we choose end element as pivot element, then O(n^2) is the time complexity.
