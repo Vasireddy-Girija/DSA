@@ -139,4 +139,35 @@ class Solution {
   }
 }
 
+Sort k sorted lists - O(k^2logk) where k*k are the total number of elements.
+1.Put first element of each array in priority queue.
+2.In each iteration, remove the min element. If there exists more elements in the same row, add them to heap.
+3.Heap size will be O(k).
+class Pair{
+    int i;
+    int j;
+    Pair(int i, int j){
+        this.i = i;
+        this.j = j;
+    }
+}
+class Solution
+{
+    public static ArrayList<Integer> mergeKArrays(int[][] arr,int K) 
+    {
+        ArrayList<Integer> ans = new ArrayList<>();
+        Comparator<Pair> comp = (a,b)->(arr[a.i][a.j]-arr[b.i][b.j]);
+        PriorityQueue<Pair> pq = new PriorityQueue<>(K, comp);
+        for(int i=0; i<K; i++){
+            pq.add(new Pair(i, 0));
+        }
+        while(!pq.isEmpty()){
+            Pair min = pq.poll();
+            ans.add(arr[min.i][min.j]);
+            if(min.j+1<K) pq.add(new Pair(min.i, min.j+1));
+        }
+        return ans;
+    }
+}
+
 median in an array, in a stream (median of odd numbers is at index n/2, median of even numbers is at index n/2, n/2+1)
