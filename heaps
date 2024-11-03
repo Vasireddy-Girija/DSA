@@ -18,6 +18,7 @@ PriorityQueue<Integer> pq = new PriorityQueue<>(Collections.reverseOrder());
 PriorityQueue<Integer> pq = new PriorityQueue<>((a, b)->(b-a));
 To create a minheap from all elements of arr[], add all elements to priorityQueue. To make a maxHeap, add -ve of all elements to priorityQueue. 
 
+Insertion - O(logN), Deletion - O(logN), getMin - O(1), shiftUp - O(logN), shiftDown - O(logN)
 class MinHeap{
   int[] heapArr;
   int heapSize;
