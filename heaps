@@ -170,4 +170,25 @@ class Solution
     }
 }
 
+Merge k sorted linked lists -
+*Before adding to priority queue, check that it is not null.
+*Use dummy node as head sicen we have to create new linked list and at the end, return dummy.next.
+class Solution {
+    public ListNode mergeKLists(ListNode[] lists) {
+        ListNode head = new ListNode(-1);
+        ListNode temp = head;
+        Comparator<ListNode> comp = (a, b)->(a.val-b.val);
+        PriorityQueue<ListNode> pq = new PriorityQueue<>(comp);
+        for(int i=0; i<lists.length; i++){
+            if(lists[i] != null) pq.add(lists[i]);
+        }
+        while(!pq.isEmpty()){
+            ListNode min = pq.poll();
+            temp.next = min;
+            temp = temp.next;
+            if(min.next != null) pq.add(min.next);
+        }
+        return head.next;
+    }
+}
 median in an array, in a stream (median of odd numbers is at index n/2, median of even numbers is at index n/2, n/2+1)
