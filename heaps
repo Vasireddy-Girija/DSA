@@ -119,5 +119,24 @@ keep extracing min till heap becomes empty - O(nlogn)
 
 Check if array represent minHeap - Loop through arr, for each element, check if it is lower than its children.
 
-kth smallest/ largest number in an array, in a stream
+kth smallest/ largest number in an array, in a stream -
+For kth smaller element, use maxHeap
+For kth larger element, use minHeap of k size. If element > min of minHeap, remove min and add it to the heap. 
+class Solution {
+  public int findKthLargest(int[] nums, int k) {
+      PriorityQueue<Integer> pq = new PriorityQueue<>(k);
+      for(int i=0; i<k; i++){
+          pq.add(nums[i]);
+      }
+      for(int i=k; i<nums.length; i++){
+          int min = pq.peek();
+          if(nums[i]>min){
+              pq.poll();
+              pq.add(nums[i]);
+          }
+      }
+      return pq.peek();
+  }
+}
+
 median in an array, in a stream (median of odd numbers is at index n/2, median of even numbers is at index n/2, n/2+1)
