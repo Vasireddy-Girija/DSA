@@ -9,6 +9,7 @@ Priority Queue - used to implement heaps (by default, it is a minHeap)
 PriorityQueue<Integer> pq = new PriorityQueue<>();
 PriorityQueue<Integer> pq = new PriorityQueue<>(int capacity);
 PriorityQueue<Integer> pq = new PriorityQueue<>(int capacity, Comparator);
+pq.add(), pq.poll(), pq.peek() for adding, deleting and first element of priority queue.
 
 reverse Order -
 PriorityQueue<Integer> pq = new PriorityQueue<>(Collections.reverseOrder());
@@ -115,6 +116,8 @@ for(int i=n/2-1; i>=0; i++) shiftDown(i); //parent of last leaft node(n-1) is n/
 heapSort - TC - O(n)
 Create a minHeap from arr - O(n)
 keep extracing min till heap becomes empty - O(nlogn)
+
+Check if array represent minHeap - Loop through arr, for each element, check if it is lower than its children.
 
 kth smallest/ largest number in an array, in a stream
 median in an array, in a stream (median of odd numbers is at index n/2, median of even numbers is at index n/2, n/2+1)
