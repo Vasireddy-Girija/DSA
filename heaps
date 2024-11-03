@@ -126,20 +126,20 @@ kth smallest/ largest number in an array, in a stream -
 For kth smaller element, use maxHeap
 For kth larger element, use minHeap of k size. If element > min of minHeap, remove min and add it to the heap. 
 class Solution {
-  public int findKthLargest(int[] nums, int k) {
-      PriorityQueue<Integer> pq = new PriorityQueue<>(k);
-      for(int i=0; i<k; i++){
-          pq.add(nums[i]);
-      }
-      for(int i=k; i<nums.length; i++){
-          int min = pq.peek();
-          if(nums[i]>min){
-              pq.poll();
-              pq.add(nums[i]);
-          }
-      }
-      return pq.peek();
-  }
+    public int findKthLargest(int[] nums, int k) {
+        PriorityQueue<Integer> pq = new PriorityQueue<>(k);
+        for(int i=0; i<nums.length; i++){
+            if(pq.size() < k) pq.add(nums[i]);
+            else{
+                int min = pq.peek();
+                if(nums[i]>min){
+                    pq.poll();
+                    pq.add(nums[i]);
+                }
+            }
+        }
+        return pq.peek();
+    }
 }
 
 Sort k sorted lists - O(k^2logk) where k*k are the total number of elements.
