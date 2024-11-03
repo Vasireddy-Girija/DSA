@@ -1,5 +1,5 @@
 heaps - minHeap, maxHeap
-complete binary tree
+complete binary tree - So we can represent it as an array. And this array will have no null/empty values.
 parent - i, left child - 2*i+1, right child - 2*i+2
 parent for child i - (i-1)/2
 operations - shiftUp, shiftDown(heapify), insert, extractMin, extractMax, delete, heapSort, createHeap
@@ -14,6 +14,107 @@ reverse Order -
 PriorityQueue<Integer> pq = new PriorityQueue<>(Collections.reverseOrder());
 PriorityQueue<Integer> pq = new PriorityQueue<>((a, b)->(b-a));
 To create a minheap from all elements of arr[], add all elements to priorityQueue. To make a maxHeap, add -ve of all elements to priorityQueue. 
+
+class MinHeap{
+  int[] heapArr;
+  int heapSize;
+
+  MinHeap(int capacity){
+    heapArr = new int[capacity];
+    heapSize = 0;
+  }
+
+  public int getParent(int idx){
+    return (idx-1)/2;
+  }
+
+  public int getLeftChild(int idx) return 2*idx+1;
+  public int getRightChild(int idx) return 2*idx+2;
+
+  public void shiftUp(int idx){
+    int parentIdx = parent(idx);
+    if(parentIdx < 0) return;
+    if(heapArr[parentIdx] > heapArr[idx]){
+        swap(parentIdx, idx);
+        shiftUp(parentIdx);
+    }
+  }
+
+  public void shiftUp(int idx){
+    int parentIdx = parent(idx);
+    while(parentIdx>=0 && heapArr[parentIdx]>heapArr[idx]){
+        swap(parentIdx, idx);
+        idx = parentIdx;
+    }
+  }
+
+  public void shiftDown(int idx){
+    int minIdx = idx;
+    int leftChild = 2*idx+1;
+    int rightChild = 2*idx+2;
+    while(true){
+        if(leftChild<heapSize && heapArr[leftChild]<heapArr[minIdx]){
+            swap(minIdx, leftChild);
+            minIdx = leftChild);
+        }
+        if(rightChild<heapSize && heapArr[rightChild]<heapArr[minIdx]){
+            swap(minIdx, rightChild);
+            minIdx = rightChild;
+        }
+        if(minIdx == idx) break;
+        swap(minIdx, idx);
+        idx = minIdx;
+      }
+      return;
+    }
+
+  public void shiftDown(int idx){
+    int minIdx = idx;
+    int leftChild = 2*idx+1;
+    int rightChild = 2*idx+2;
+    if(leftChild<heapSize && heapArr[leftChild]<heapArr[minIdx]){
+          swap(minIdx, leftChild);
+          minIdx = leftChild);
+      }
+      if(rightChild<heapSize && heapArr[rightChild]<heapArr[minIdx]){
+          swap(minIdx, rightChild);
+          minIdx = rightChild;
+      }
+    if(minIdx != idx){
+        swap(minIdx, idx);
+        shiftDown(minIdx);
+    }
+  }
+
+  public void insert(int val){
+    heapArr[heapSize] = val;
+    heapSize += 1;
+    shiftUp(heapSize-1);
+  }
+
+  public int extractMin(){
+    int minVal = heapArr[0];
+    heapArr[0] = heapArr[heapSize-1];
+    heapSize -= 1;
+    shiftDown(0);
+    return minVal;
+  }
+
+  //extract min is deleting element at index 0.
+  public void delete(int idx){
+      heapArr[idx] = heapArr[heapSize-1];
+      heapSize -= 1;
+      shiftDown(idx);
+  }
+}
+
+create heap from arr - TC - O(n)
+From non-leaf nodes, from end of array, keep calling shiftDown/ Heapify. 
+for(int i=n/2-1; i>=0; i++) shiftDown(i); //parent of last leaft node(n-1) is n/2-1;
+
+heapSort - TC - O(n)
+Create a minHeap from arr - O(n)
+keep extracing min till heap becomes empty - O(nlogn)
 
 kth smallest/ largest number in an array, in a stream
 median in an array, in a stream (median of odd numbers is at index n/2, median of even numbers is at index n/2, n/2+1)
