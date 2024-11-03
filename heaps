@@ -9,7 +9,9 @@ Priority Queue - used to implement heaps (by default, it is a minHeap)
 PriorityQueue<Integer> pq = new PriorityQueue<>();
 PriorityQueue<Integer> pq = new PriorityQueue<>(int capacity);
 PriorityQueue<Integer> pq = new PriorityQueue<>(int capacity, Comparator);
+PriorityQueue<Integer> pq = new PriorityQueue<>(Collections); 
 pq.add(), pq.poll(), pq.peek() for adding, deleting and first element of priority queue.
+TC for creating Priority Queue by initialising with collections - O(n) else it will be O(nlogn) as we insert elemnets one by one.
 
 reverse Order -
 PriorityQueue<Integer> pq = new PriorityQueue<>(Collections.reverseOrder());
