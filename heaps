@@ -123,6 +123,9 @@ keep extracing min till heap becomes empty - O(nlogn)
 Check if array represent minHeap - Loop through arr, for each element, check if it is lower than its children.
 
 kth smallest/ largest number in an array, in a stream -
+1.Sort the arr and return k-1 index(smallest) or n-k index(largest). - TC O(nlogn)
+2.Use max/min heap - O(nlogk)
+3.Use quick select - O(n) best case, O(n^2) worst case.
 For kth smaller element, use maxHeap
 For kth larger element, use minHeap of k size. If element > min of minHeap, remove min and add it to the heap. 
 class Solution {
@@ -142,7 +145,14 @@ class Solution {
     }
 }
 
-Sort k sorted lists - O(k^2logk) where k*k are the total number of elements.
+Top k frequent elements -
+1.Heap - Use a map to get frequency of each element. Create min heap with k elements based on frequency. 
+For all remaining elements, if root has less frequency than current  element, poll it and add current element.
+2.Use Bucket Sort algo - If number of elements of arr is n, take array of length n+1. Each element of array holdas a list.
+ Each index represents frequency of elements it holds. Iterate the list from end until e get k elements.
+
+
+Sort k sorted lists - O(k^2logk) where k*k are the total number of elements. logk as heap size is k.
 1.Put first element of each array in priority queue.
 2.In each iteration, remove the min element. If there exists more elements in the same row, add them to heap.
 3.Heap size will be O(k).
@@ -194,4 +204,5 @@ class Solution {
         return head.next;
     }
 }
+
 median in an array, in a stream (median of odd numbers is at index n/2, median of even numbers is at index n/2, n/2+1)
