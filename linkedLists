@@ -14,6 +14,7 @@ base case - if(head==null) return;
 Search for an element - O(n)
 Length of linked list - O(n)
 
+If we want to create new linked list, create dummy head, add remaining elements to the head and return dummyHead.next as answer.
 ############################################################################################
 Delete head - O(1) head=head.next;
 
