@@ -1,14 +1,47 @@
 How to take pivot - Choose pivot such that actual position of pivot lies in between(median) the start and end index.
 1.Take first element
 2.Take last element
-3.Take random element - Random rand= new Random(); int pivot = rand.nextInt(high-low)+low; //high and low are indices.
+3.Take random element - Random rand= new Random(); int pivot = rand.nextInt(high-low+1)+low; //high and low are indices.
 4.Take median of medians (Make set of arrays of 5 elements, get median of all medians and set it as pivot element, to make sure pivot doesn't lie at the end)
 
 Find partitionIndex- for sorting in ascending/increasing order.
 Take pivot as last element. Take 2 pointers i and pivotLow. pivotLow will be at a place where it is greater than pivot element.
 
-
-
 Time Complexities
 1.If we always get partition at middle element, then O(n) is the time complexity.
 2.If we choose end element as pivot element, then O(n^2) is the time complexity.
+
+class Solution {
+    public void swap(int[] nums, int idx1, int idx2){
+        int temp = nums[idx1];
+        nums[idx1] = nums[idx2];
+        nums[idx2] = temp;
+    }
+    //To sort in descending order.
+    public int getPartitionIdx(int[] nums, int low, int high, int pivotIdx){
+        swap(nums, pivotIdx, high);
+        int pivot = nums[high];
+        int partitionIdx = low;
+        for(int i=low; i<high; i++){
+            if(nums[i]>=pivot){
+                swap(nums, partitionIdx, i);
+                partitionIdx += 1;
+            }
+        }
+        swap(nums, high, partitionIdx);
+        return partitionIdx;
+    }
+    public int quickSelect(int[] nums, int low, int high, int k){
+        if(low <= high){
+            int pivotIdx = new Random().nextInt(high-low+1)+low;
+            int partitionIdx = getPartitionIdx(nums, low, high, pivotIdx);
+            if(partitionIdx == k-1) return nums[partitionIdx];
+            if(partitionIdx < k-1) return quickSelect(nums, partitionIdx+1, high, k);
+            else return quickSelect(nums, low, partitionIdx-1, k);
+        }
+        return -1;
+    }
+    public int findKthLargest(int[] nums, int k) {
+        return quickSelect(nums, 0, nums.length-1, k);
+    }
+}
