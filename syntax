@@ -5,11 +5,24 @@ int[] arr = new arr[n]; where n is thetotal number of integers in the array.
 Integer[] arr = new Integer[n];
 Length of arr - arr.length;
 Initialise all elements of arr with default value - Arrays.fill(arr, -1); here -1 is default value.
+For initialising 2D array, int dp[m][n], Use Arrays.fill for each row.
+for(int i=0; i<m; i++) Arrays.fill(dp[i], -1);
 
 List - List is an interface. Cannot create lists with primitives as it is not supported for Generics.
 ArrayList is implementation of List interface.
 List<Integer> lst = new ArrayList<>();
 Size of array list - lst.size();
+
+Convert List<Integer> to int[] - int[] arr = lst.stream().mapToInt(i -> i).toArray();
+Convert Object array to Object list - List<Integer> lst = Arrays.asList(arr); //Integer[] arr
+Convert primitive array to Object list - int[] arr
+List<Integer> list = Arrays.stream(arr).boxed().collect(Collectors.toList());
+
+Sort methods sort the elements inplace.
+Collections.sort(Object List), Collections.sort(ObjList, Collections.reverseOrder());
+Arrays.sort(primitive array/Object array)
+For Object array, Arrays.sort(objArr, Colections.reverseOrder());
+For primitive array, Arrays.sort(primArr, Collections.reverseOrder()) will NOT work.
 
 Map -
 Map<Integer, String> map = new HashMap<>();
@@ -56,3 +69,5 @@ String str = String.valueOf(chArray);
 Convert List of Character to String -
 Convert String to char array -
 char[] chArray = str.toCharArray();
+Character at index i of a string - str.chart(i)
+Character - 'c', String - "c"
