@@ -13,8 +13,11 @@ ArrayList is implementation of List interface.
 List<Integer> lst = new ArrayList<>();
 Size of array list - lst.size();
 
+Array of lists - List<Integer>[] arrOfLists = new ArrayList[n]; //NOT new ArrayList<>[n];
+List of Arrays - List<Integer[]> listOfArr = new ArrayList<Integer[]>();
+
 Convert List<Integer> to int[] - int[] arr = lst.stream().mapToInt(i -> i).toArray();
-Convert Object array to Object list - List<Integer> lst = Arrays.asList(arr); //Integer[] arr
+Convert Object array to Object list - List<Integer> lst = new ArrayList<>(Arrays.asList(arr)); //Integer[] arr
 Convert primitive array to Object list - int[] arr
 List<Integer> list = Arrays.stream(arr).boxed().collect(Collectors.toList());
 
