@@ -1,5 +1,46 @@
 sorting - insertion sort
-median - heaps
+
+median - heaps - 
+Brute force - Use insertion sort to sort the array as and when new element is getting added.
+Optimised - Use heaps.
+class MedianFinder {
+    PriorityQueue<Integer> maxHeap = new PriorityQueue<>(Collections.reverseOrder());
+    PriorityQueue<Integer> minHeap = new PriorityQueue<>(); //store more num of elements than maxHeap.
+    public MedianFinder() {
+        
+    }
+    
+    public void addNum(int num) {
+        if(minHeap.size()==0){
+            minHeap.add(num);
+            return;
+        }
+        if(minHeap.size()==maxHeap.size()){
+            if(maxHeap.peek()>num){
+                maxHeap.add(num);
+                minHeap.add(maxHeap.poll());
+            }else{
+                minHeap.add(num);
+            }
+            return;
+        }
+        if(minHeap.size()==maxHeap.size()+1){
+            if(maxHeap.size()>0 && maxHeap.peek()>num){
+                maxHeap.add(num);//makes heaps same size
+            }else{
+                minHeap.add(num);
+                maxHeap.add(minHeap.poll());
+            }
+        }
+    }
+    
+    public double findMedian() {
+        if(minHeap.size()==maxHeap.size()) return (((double)minHeap.peek())+maxHeap.peek())/2;
+        return minHeap.peek();
+    }
+}
+
+
 kth smallest/ largest - heaps
 min of set of numbers where we add and remove elements - minStack, minHeap
 Disjoint set - graphs (check if 2 vertices belong to same component)
