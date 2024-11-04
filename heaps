@@ -233,4 +233,26 @@ class Solution {
     }
 }
 
+Replace array by its rank - Put index in priority queue instead of element if we need index.
+class Solution {
+    static int[] replaceWithRank(int arr[], int N) {
+     Comparator<Integer> comp = (a, b)->(arr[a]-arr[b]);
+     PriorityQueue<Integer> pq = new PriorityQueue<>(comp);
+     for(int i=0; i<N; i++) pq.add(i);
+     
+     int[] ans = new int[N];
+     int prev = -1;
+     int rank = 0;
+     while(!pq.isEmpty()){
+         int top = pq.poll();
+         if(prev==-1 || arr[prev]!=arr[top]){
+             rank += 1;
+         }
+         ans[top] = rank;
+         prev = top;
+     }
+     return ans;
+  }
+}
+
 median in an array, in a stream (median of odd numbers is at index n/2, median of even numbers is at index n/2, n/2+1)
