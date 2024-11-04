@@ -150,6 +150,34 @@ Top k frequent elements -
 For all remaining elements, if root has less frequency than current  element, poll it and add current element.
 2.Use Bucket Sort algo - If number of elements of arr is n, take array of length n+1. Each element of array holdas a list.
  Each index represents frequency of elements it holds. Iterate the list from end until e get k elements.
+TC - O(N), SC- O(N)
+class Solution {
+    public int[] topKFrequent(int[] nums, int k) {
+        Map<Integer, Integer> freqMap = new HashMap<>();
+        for(int num: nums){
+            freqMap.put(num, freqMap.getOrDefault(num, 0)+1);
+        }
+        List<Integer>[] freqArr = new ArrayList[nums.length+1];
+        for(int i=0; i<nums.length+1; i++){
+            freqArr[i] = new ArrayList<>();
+        }
+        for(int key:freqMap.keySet()){
+            freqArr[freqMap.get(key)].add(key);
+        }
+        int[] ans = new int[k];
+        int count = 0;
+        for(int i=nums.length; i>=1; i--){
+            if(freqArr[i].size()==0) continue;
+            for(int element: freqArr[i]){
+                ans[count] = element;
+                count += 1;
+                if(count == k) break;
+            }
+            if(count == k) break;
+        }
+        return ans;
+    }
+}
 
 
 Sort k sorted lists - O(k^2logk) where k*k are the total number of elements. logk as heap size is k.
