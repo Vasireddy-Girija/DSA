@@ -95,3 +95,12 @@ Convert String to char array -
 char[] chArray = str.toCharArray();
 Character at index i of a string - str.chart(i)
 Character - 'c', String - "c"
+str.substring(0,n) - str.subString(startIdx, endIdx+1)
+String[] str1 = str.split(",");
+str2 = str.trim(); - remove leading and tailing empty spaces. Empy spaces in between the string will not be removed.
+
+StringBuilder - mutable, not thread safe
+
+
+
+Iterator -
