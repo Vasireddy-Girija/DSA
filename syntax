@@ -30,11 +30,32 @@ For primitive array, Arrays.sort(primArr, Collections.reverseOrder()) will NOT w
 Map -
 Map<Integer, String> map = new HashMap<>();
 map.size();
-map.containsKey(key);
+map.containsKey(key); map.containsValue(key);
 map.putIfAbsent(key, value); //If key is already present, then it will not do anything.
 map.put(key, value);
 map.get(key); // Always check if key is present in map and then use map.get(key);
 map.getOrDefault(key, defaultValue); //if key is present, it gives value of key, otherwise it gives default value.
+map.keySet(); map.values(); map.entrySet(); isEmpty()
+Types - HashMap, LinkedHashMap, TreeMap
+HashMap - no order - get, put , remove, containsKey() - O(1)
+LinkedHashMap - maintains insertion order - get, put , remove, containsKey() - O(1)
+TreeMap - maintains sorted order or order given by comparator. - put, get, contains, remove - O(logn)
+TreeMap uses red-black tree which is a self-balancing binary search tree.
+
+Set - HashSet, LinkedHashSet, TreeSet
+Set  stores unique elements
+HashSet - stores elements in a hashTable. Doesn't maintain any order. Allows insertion of null element.
+TC for add, remove, contains, size - O(1) assuming no collisons.
+LinkedHashSet - stores elements in doubly linked list, that maintains insertion order.This class etends HashSet. Allows one null element.
+TC for add, remove, contains, size - O(1)
+TreeSet - stores elemnt in red-black tree. Elemnts will be sorted or ordered by comparator given at set creation.
+Set set = ne TreeSet<>(comparator);
+TC for add, remove, contains - O(logn). 
+Doesn't allow null elements as elements needs to be compared for sorting.
+Union between 2 sets a,b - a.addAll(b)
+Intersection between 2 sets a,b - a.retainAll(b)
+Difference between 2 sets a,b - a.removeAll(b)
+
 
 Queue - First In Last Out data structure (FIFO)
 Queue q = new LinkedList<>();
