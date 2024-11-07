@@ -11,6 +11,10 @@ Store graphs -
 adjacency matrix - int[V][V]
 adjacency list - List<List<Integer>>
 
+***IMP
+For Directed graphs, adjList.get(u).add(v);
+For Un-directed graphs, adjList.get(u).add(v); adjList.get(v).add(u);
+
 Components - Graphs that are not connected. Always do the traversals for all components.
 Ex:
 for(int i=0; i<v; i++){
@@ -120,30 +124,30 @@ public void dfs(int node, ArrayList<ArrayList<Integer>> adj, boolean[] visited, 
 BFS - Use in_degree array - if indegree is 0, then mark it visited and put in the queue.
 *If len(topoSort) != V, then the graph has cycle.
 *Multiple components not required as indegree will handle it and put in the queue in the beginning.
+*Visited array is not not needed as elements are marked visited only when teir indegree is 0 and once their indegree becomes zero, 
+we will not have any new u such that theur is an edge from u->v. So visited array is redundant.
+*Number of visited should be equal to number if vertices for DAG. If they are not equal, then it is not DAG.
+****This topoSort will not have elements which are part of cycle and nodes which have incoming edges from a cycle.
 static int[] bfs_topoSort(int V, int[] indegree, ArrayList<ArrayList<Integer>> adj){
         Queue<Integer> q = new LinkedList<>();
-        boolean[] visited = new boolean[V];
+        int visited = 0;
         for(int i=0; i<indegree.length; i++){
             if(indegree[i] == 0){
                 q.add(i);
-                visited[i] = true;
             }
         }
         int[] topSort = new int[V];
-        int j=0;
         while(!q.isEmpty()){
             int node = q.poll();
+            topSort[j] = node;
+            visited += 1;
             for(int element: adj.get(node)){
-                if(!visited[element]){
                     indegree[element] -= 1;
                     if(indegree[element] == 0){
                         q.add(element);
-                        visited[element] = true;
                     }
                 }
             }
-            topSort[j] = node;
-            j += 1;
         }
         return topSort;
     }
