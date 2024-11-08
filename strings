@@ -1,0 +1,2 @@
+1.Given 2 strings, find if str2 is a sub-sequence of str1. Time Complexity - O(m+n) 
+Take 2 pointers starting at index 0 for str1, str2 and check. Here m & n are len of str1 and str2 respectively.
