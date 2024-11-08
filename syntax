@@ -7,6 +7,8 @@ Length of arr - arr.length;
 Initialise all elements of arr with default value - Arrays.fill(arr, -1); here -1 is default value.
 For initialising 2D array, int dp[m][n], Use Arrays.fill for each row.
 for(int i=0; i<m; i++) Arrays.fill(dp[i], -1);
+int [][] twoDArray = { { 1, 2, 3 }, { 4, 5, 6 } };
+ArrayList<String> places = new ArrayList<>(Arrays.asList("Buenos Aires", "Córdoba", "La Plata"));
 
 List - List is an interface. Cannot create lists with primitives as it is not supported for Generics.
 ArrayList is implementation of List interface.
