@@ -171,8 +171,13 @@ Time complexity of Dijkstra - ElogV
 Start Dijkstra with a priority queue to store [dst from src node, node] in ascending order. Start with (0, src) in priority queue
 and iteratite till it becomes empty.
 
+pq.add(new iPair(src, 0));
+int[] dst = new int[n];
+Arrays.fill(dst, Integer.MAX_VALUE);
+dst[src] = 0;
+
 relaxation of edges - edge form u -> v with weight wt
-if(dist[v] > dist[u]+wt]), then dist[v]=dist[u]+wt;
+if(dist[u] != Integer.MAX_VALUE && dist[v] > dist[u]+wt]), then dist[v]=dist[u]+wt;
 
 Bellman Ford algo - TC - O(V*E)
 Applicable only for Directed graph. If we have undirected graph, convert to directed graph.
