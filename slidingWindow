@@ -87,10 +87,48 @@ substring without repeating characters.
 Hint - maxLen and subArray with a condition. -> Use 2 pointer-sliding window.
 Sol - Maintain a map with recent index for each char. If we see get a char that is already in map and left pointer is less than the index in map, 
       move left to index in map+1 and continue.
+class Solution {
+    public int lengthOfLongestSubstring(String s) {
+        Map<Character, Integer> map = new HashMap<>();
+        int n = s.length();
+        int l = 0;
+        int r = 0;
+        int maxLen = 0;
+        while(r < n){
+            if(map.containsKey(s.charAt(r))){
+                if(!(l> map.get(s.charAt(r)))) l = map.get(s.charAt(r))+1; //try for string "abba" why we have this check.
+            }
+            map.put(s.charAt(r), r);
+            maxLen = Math.max(maxLen, r-l+1);
+            r += 1;
+        }
+        return maxLen;
+    }
+}
 
 2.Max Consecutive Ones III - Given a binary array nums and an integer k, return the maximum number of consecutive 1's in the array if you can flip at most k 0's.
 Hint : maxLen, consecutive - subArray -> Use 2 pointer - sliding window.
 Sol - if arr[i] ==0, count += 1, if(count >k) -> check if arr[l] is 1 and decrease it, move l+= 1. For each loop, increase r.
+class Solution {
+    public int longestOnes(int[] nums, int k) {
+        int n = nums.length;
+        int l=0;
+        int r=0;
+        int count = 0;
+        int maxCount = 0;
+        while(r < n){
+            if(nums[r]==0) count += 1;
+            if(count > k){
+                if(nums[l] == 0) count -=1;
+                l += 1;
+            }else{
+                maxCount = Math.max(r-l+1, maxCount);
+            }
+            r += 1;
+        }
+        return maxCount;
+    }
+}
 
 3.Fruit into baskets - Consecutive fruits such that there should not be no more than 2 types of distinct fruits in the consecutive segment. 
 Find the len of the consecutive segment.
