@@ -217,3 +217,22 @@ class Solution {
 }
 
 ######################################################################################################################
+BINARY SEARCH ON ANSWERS - If answer has a range in sorted order and the element of interest moves in one direction within that range mostly.
+Square root of n - low=0, high=n, if(mid*mid==n) return mid.
+Nth root of a num - TC - n(logm)
+class Solution
+{
+    public int NthRoot(int n, int m)
+    {
+        int low = 0;
+        int high = m;
+        while(low <= high){
+            int mid = low + (high-low)/2;
+            int powerVal = (int)Math.pow(mid, n);
+            if(powerVal == m) return mid;
+            if(powerVal > m) high=mid-1;
+            else low=mid+1;
+        }
+        return -1;
+    }
+}
