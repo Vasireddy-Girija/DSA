@@ -15,3 +15,32 @@ public int numOfPossibleBouquets(int[] bloomDayList, int currDay, int k){
     }
     return totalBouquets;
 }
+
+In how many days, can we ship the weights, if max. capacity is given.
+public boolean canShipInDays(int[] weights, int days, int capacity){
+    int currWeight = 0;
+    int ansDays = 0;
+    for(int element: weights){
+        if(currWeight+element <= capacity){
+            currWeight = currWeight + element;
+        }else{
+            ansDays += 1;
+            if(ansDays > days) return false;
+            currWeight = element;
+        }
+    }
+    if(currWeight <= capacity) ansDays += 1;
+    return ansDays <= days;
+}
+
+kth missing positive num - Input: arr = [2,3,4,7,11], k = 5; Output: 9
+Brute force - put elements in map. And start looping from 1 to n.
+class Solution {
+    public int findKthPositive(int[] arr, int k) {
+        for(int element : arr){
+            if(element<=k) k+=1;
+            else break;
+        }
+        return k;
+    }
+}
