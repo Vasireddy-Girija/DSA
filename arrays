@@ -1,1 +1,17 @@
-
+Flower can be formed on or after bloomDay. k consecutive flowers can form a bouqet. Find number of bouqets formed if qw are on currDay.
+public int numOfPossibleBouquets(int[] bloomDayList, int currDay, int k){
+    int numOfFlowersInEachBouquet = 0;
+    int totalBouquets = 0;
+    for(int bloomDay : bloomDayList){
+        if(bloomDay <= currDay){
+            numOfFlowersInEachBouquet += 1;
+            if(numOfFlowersInEachBouquet == k){
+                totalBouquets += 1;
+                numOfFlowersInEachBouquet = 0;
+            }
+        }else{
+            numOfFlowersInEachBouquet = 0;
+        }
+    }
+    return totalBouquets;
+}
