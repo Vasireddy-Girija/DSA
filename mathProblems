@@ -1,3 +1,6 @@
+To find floor or ceil of integers, convert one of it to double - Math.ceil((double)a/b) of (a+b-1)/b gives ceil.
+For floor - Math.floor((double)a/b) is same as a/b.
+
 1.pow(x,n)
 if n <0, return 1/pow(x,-n)
 recursion - if n is odd x*pow(x,n-1), if n is even pow(x,n/2)*pow(x,n/2)
