@@ -14,6 +14,9 @@ low=0, high=n-1, mid=low+(high-low)/2. mid is calculated this way so that it doe
 while returning ans, if the condition for mid has mid-1 and mid+1, handle cases for 0,n-1 separately and start binary search from 
 low = 1 and high=n-2. Similiar to problems in find single element and peak element.
 
+In most ans, we will return either low or high. If low satisfies condition at the beginning and high doesn't, then return high and viceversa.
+Basically, we'll have to return the reverse. Binary Search stops there.
+
 Binary Search algo - O(logn)
 class Solution {
     public int search(int[] nums, int target) {
@@ -245,10 +248,11 @@ If ans has a range and we take one of the answers and check it with some threhol
 range - (min, max) or (min, sum) or (1, max)
 
 #################################################################################################################################
-MAX OF MIN, MIN OF MAX 
+MAX OF MIN, MIN OF MAX - Questions where split is done by taking continuous portions.
 TC - O(N * log(sum(arr)-max(arr)))
 Given an integer array nums and an integer k, split nums into k non-empty subarrays such that the largest sum of any subarray is minimized.
 Return the minimized largest sum of the split.A subarray is a contiguous part of the array.
+If low won't be an ans at the beginning, return low at the end and viceversa.
 
 class Solution {
     public int partitionCount(int[] nums, int maxSumAllowed){
