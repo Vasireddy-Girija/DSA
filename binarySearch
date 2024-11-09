@@ -236,3 +236,6 @@ class Solution
         return -1;
     }
 }
+
+If ans has a range and we take one of the answers and check it.
+range - (min, max) or (min, sum) or (1, max)
