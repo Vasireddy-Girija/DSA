@@ -362,3 +362,50 @@ class Solution {
         return -1;
     }
 }
+#################################################################################################################################
+Binary Search on 2D array - Each row being sorted can be a hint.
+TC O(row*log(col))
+1.A 2D array has only 0s and 1s in each row. Each row is sorted. Find row with max 1s.
+For each row, ColLength - lowerBoundOfOne will be number of 1s. Return the row with max 1s.
+
+2.2D matrix in which rows are sorted and first element of each row is greater than last element of prev row.
+Basically a single sorted array split to multiple rows by splitting it after n(col length) elements.
+Find row in which we can find the element. Find col in that row where we can find the element.
+class Solution {
+    public boolean searchMatrix(int[][] matrix, int target) {
+        int m = matrix.length;
+        int n = matrix[0].length;
+        if(target<matrix[0][0] || target>matrix[m-1][n-1]) return false;
+        //find row in which we can find the element by doing binary search on 1st columns.
+        int low = 0;
+        int high = m-1;
+        while(low <= high){
+            int mid = low + (high-low)/2;
+            if(matrix[mid][0] == target) return true;
+            if(matrix[mid][0]>target) high = mid-1;
+            else low=mid+1;
+        }
+
+        int requiredRow = high;
+        //Perform binary search in this row.
+        low = 0;
+        high = n-1;
+        while(low <= high){
+            int mid = low+(high-low)/2;
+            if(matrix[requiredRow][mid]==target) return true;
+            if(matrix[requiredRow][mid]>target) high = mid-1;
+            else low = mid+1;
+        }
+        return false;
+    }
+}
+
+3.Write an efficient algorithm that searches for a value target in an m x n integer matrix matrix. 
+This matrix has the following properties:
+Integers in each row are sorted in ascending from left to right.
+Integers in each column are sorted in ascending from top to bottom.
+Start from (0,m-1) or(n-1,0) and if value is more than target, decrease row else increase col.
+Do it till row and col are in boundaries.
+TC - O(m+n)
+
+4.
