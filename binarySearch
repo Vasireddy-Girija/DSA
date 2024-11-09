@@ -4,6 +4,10 @@ Rotated sorted array - search for element in unique, search for element in dupli
 Time Complexity - log(n)
 Max or min (binary search on answers)
 
+The primary objective of the Binary Search algorithm is to efficiently determine the appropriate half to eliminate, 
+thereby reducing the search space by half. It does this by determining a specific condition that ensures that the target is 
+not present in that half.
+
 In binary search, for every iteration, we should be able to lower the search space by half. This yields to logn time complexity.
 low=0, high=n-1, mid=low+(high-low)/2. mid is calculated this way so that it doesn't overflow where high+low can be more than Integer.MAX_VALUE.
 
@@ -216,7 +220,7 @@ class Solution {
     }
 }
 
-######################################################################################################################
+#################################################################################################################################
 BINARY SEARCH ON ANSWERS - If answer has a range in sorted order and the element of interest moves in one direction within that range mostly.
 Square root of n - low=0, high=n, if(mid*mid==n) return mid.
 Nth root of a num - TC - n(logm)
@@ -237,5 +241,47 @@ class Solution
     }
 }
 
-If ans has a range and we take one of the answers and check it.
+If ans has a range and we take one of the answers and check it with some threhold/condition given in the question.
 range - (min, max) or (min, sum) or (1, max)
+
+#################################################################################################################################
+MAX OF MIN, MIN OF MAX
+
+
+#################################################################################################################################
+Median of 2 sorted arrays - TC - O(min(m,n)) where m and n are len of arrays.
+We will apply binary search based on length of first array. So let's choose min length of the array.
+While doing binary search, if we take x elements from 1st array, we will take (n+m)/2-x elements from 2nd array.
+The mid we calculate will be the partition. We will have left element of partition as arr[mid-1] and right element as arr[mid].
+mid1 is calculated based on binary search. mid2 is calculated such that number of elements in left part would be (n+m)/2.
+Condition for valid split - max(l1, l2)<=min(r1, r2) i.e all left elements are smaller or equal to right elements.
+class Solution {
+    public double findMedianSortedArrays(int[] nums1, int[] nums2) {
+        int m = nums1.length;
+        int n = nums2.length;
+        if(m > n) return findMedianSortedArrays(nums2, nums1);
+        int numLeftElements = (m+n+1)/2; //handles even and odd case.
+        int low = 0;
+        int high = m;//as all m elements can be in one half.
+        //Here low and high are not indexes. It is pointer where we can partition.
+        while(low<=high){
+            int mid1 = low+(high-low)/2;
+            int mid2 = numLeftElements-mid1; 
+            //It is always taken care that elements before mid1 and elements before mid2 would
+            //be total of numLeftElements.
+            int l1 = mid1>0 ? nums1[mid1-1]: Integer.MIN_VALUE;
+            int l2 = mid2>0 ? nums2[mid2-1]: Integer.MIN_VALUE;
+            int r1 = mid1<m ? nums1[mid1]: Integer.MAX_VALUE;
+            int r2 = mid2<n ? nums2[mid2]: Integer.MAX_VALUE;
+
+            if(l1<=r2 && l2<=r1){
+                if((n+m)%2 == 1) return Math.max(l1, l2);
+                return ((double)(Math.max(l1, l2)+Math.min(r1, r2)))/2;
+            }
+
+            if(l1>=r2) high = mid1-1;
+            else low = mid1+1;
+        }
+        return -1;
+    }
+}
