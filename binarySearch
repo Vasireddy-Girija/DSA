@@ -255,6 +255,7 @@ While doing binary search, if we take x elements from 1st array, we will take (n
 The mid we calculate will be the partition. We will have left element of partition as arr[mid-1] and right element as arr[mid].
 mid1 is calculated based on binary search. mid2 is calculated such that number of elements in left part would be (n+m)/2.
 Condition for valid split - max(l1, l2)<=min(r1, r2) i.e all left elements are smaller or equal to right elements.
+For binary search, if l1>r2, then we should reduce elements in arr1, so high=mid1-1.
 class Solution {
     public double findMedianSortedArrays(int[] nums1, int[] nums2) {
         int m = nums1.length;
