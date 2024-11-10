@@ -1,10 +1,35 @@
+subArray sum - sliding window, subsequence sum - DP
+
 2 types -
 1.Find longest subArray whose sum = k 
 2.Find count of subArrays whose sum = k
 
 How to solve it depends on the range of array values.
-case-1: if array values are positive (>0)
-case-2: if array values are positive and 0
+#########################################################################################################
+Find maxLen of subArray whose sum is k
+#########################################################################################################
+Brute force -
+
+case-1: To find maxLen if array values are positive (>0), case-2: if array values are positive and 0
+class Solution {
+    public int lenOfLongestSubarr(int[] arr, int k) {
+        int l = 0;
+        int r = 0;
+        int maxLen = 0;
+        int sum = 0;
+        while(r<arr.length){
+            sum += arr[r];
+            while(sum > k){
+                sum -= arr[l];
+                l += 1;
+            }
+            if(sum==k) maxLen = Math.max(maxLen, r-l+1);
+            r += 1;
+        }
+        return maxLen;
+    }
+}
+
 case-3: if array values are positives, 0, negatives
 
 case-1: sliding window two pointer
