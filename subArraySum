@@ -75,8 +75,55 @@ case-3: Take map. Take map with val & count
 
 #####
 Find length of subArray with max. sum - Kadane's algorithm 
-If all positives and zeroes, total sum of array is the max sum
-
+If all positives and zeroes, total sum of array is the max sum.
+Subarray with a sum less than 0 will always reduce our answer and so this type of subarray cannot be a part of the subarray with maximum sum.
+public class Main {
+    public static long maxSubarraySum(int[] arr, int n) {
+        long maxi = Long.MIN_VALUE; // maximum sum
+        long sum = 0;
+        for (int i = 0; i < n; i++) {
+            sum += arr[i];
+            if (sum > maxi) {
+                maxi = sum;
+            }
+            // If sum < 0: discard the sum calculated
+            if (sum < 0) {
+                sum = 0;
+            }
+        }
+        // To consider the sum of the empty subarray
+        // uncomment the following check:
+        //if (maxi < 0) maxi = 0;
+        return maxi;
+    }
+}
+Find this subarray -
+public class Main {
+    public static long maxSubarraySum(int[] arr, int n) {
+        long maxi = Long.MIN_VALUE; // maximum sum
+        long sum = 0;
+        int start = -1;
+        int ansStart = -1;
+        int ansEnd = -1;
+        for (int i = 0; i < n; i++) {
+            if(sum == 0) start=i;
+            sum += arr[i];
+            if (sum > maxi) {
+                maxi = sum;
+                ansStart = start;
+                ansEnd = i;
+            }
+            // If sum < 0: discard the sum calculated
+            if (sum < 0) {
+                sum = 0;
+            }
+        }
+        // To consider the sum of the empty subarray
+        // uncomment the following check:
+        //if (maxi < 0) maxi = 0;
+        return maxi;
+    }
+}
 #####
 TC - O(N * log(sum(arr)-max(arr)))
 Given an integer array nums and an integer k, split nums into k non-empty subarrays such that the largest sum of any subarray is minimized.
