@@ -1,6 +1,15 @@
 n elements, each subarray of length k, we get (n-k+1) sub-arrays.
 
-Find subarays of size k in an array of len n. Find max of each sub-array and add it in a list and return the list.
+Total num of sub-arrays in an arr of size n - (n)*(n+1)/2
+Here, of size 1, we'll have n sub-arrays, of size 2, we'll have n-1 sub-arrays and so on..
+
+In an array, an element has m elements before it and n elements after it (element is exclued in count).
+Total num of sub-arrays with this element included - (m+1)*(n+1) //check with base-case m=n=0.
+
+In an array, how many times an element can be max/min for all the subArrays which is part of - 
+Use stack/ next greater or smaller element on both sides  and use (m+1)*(n+1) to get the count.
+
+Find subarrays of size k in an array of len n. Find max of each sub-array and add it in a list and return the list.
 Brute force - TC - O(n-k)*n
 class Solution {
     public int[] maxSlidingWindow(int[] nums, int k) {
