@@ -106,7 +106,7 @@ public boolean dfs(int node, ArrayList<ArrayList<Integer>> adj, boolean[] visite
         path[node] = false;
         return false;
     }
-BFS - can be done using topological sort.
+BFS - can be done using topological sort Kahn's/indegree algorithm. DFS toposort type doesn't work.
 
 ########################################################################################################################
 Topological sort - Possible only for directed acyclic graphs.
