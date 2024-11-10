@@ -106,3 +106,14 @@ StringBuilder - mutable, not thread safe
 
 
 Iterator -
+
+
+Comparator -
+Arrays.sort(arr, Colections.reverseOrder());
+Arrays.sort(arr, comp);
+Collections,sort(lst, comp);
+new PriorityQueue<>(comp);
+Comparator<Integer> comp = (a,b)->(a-b); sorts list of integers in ascending order.
+Comparator<int[]> compOfIntArr = (a,b)->(b[1]-a[1]); sorts int[] in descending order of 2nd element of int[]
+Arrays.sort(int[][], compOfIntArr); In compOfIntArr, each element should be int[].
+How to sort based on multiple criteria - ?
