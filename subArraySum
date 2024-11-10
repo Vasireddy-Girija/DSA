@@ -71,6 +71,22 @@ Find number of subArray whose sum is k
 case-1: sliding window two pointer
 case-2: sliding window two pointer - calculate for <=k and <=k-1
 case-3: Take map. Take map with val & count 
+class Solution {
+    public int subarraySum(int[] nums, int k) {
+        Map<Integer, Integer> prefixSumCountMap = new HashMap<>();
+        int prefixSum = 0;
+        int count = 0;
+        for(int num: nums){
+            prefixSum += num;
+            if(prefixSum == k) count += 1; //Count before putting intp map as map might not contain prefixSum with 0.
+            if(prefixSumCountMap.containsKey(prefixSum-k)){
+                count += prefixSumCountMap.get(prefixSum-k);
+            }
+            prefixSumCountMap.put(prefixSum, prefixSumCountMap.getOrDefault(prefixSum, 0)+1);
+        }
+        return count;
+    }
+}
 
 
 #####
