@@ -1,1 +1,141 @@
+If we want insert and delete operations in O(1), use DLL with map. This map stores reference to DLL node.
 
+class Node{
+  int data;
+  Node prev;
+  Node next;
+
+  Node(int data){
+    this.data = data;
+  }
+}
+
+Construct a DLL from array -
+class Solution {
+    Node constructDLL(int arr[]) {
+        Node dummy = new Node(-1);
+        Node temp = dummy;
+        for(int element: arr){
+            Node newNode = new Node(element);
+            newNode.prev = temp;
+            temp.next = newNode;
+            temp = temp.next;
+        }
+        if(dummy.next != null) dummy.next.prev = null;
+        return dummy.next;
+    }
+}
+
+Insert a node in DLL - O(n)
+Insert it after pth position 0-based indexing. If p==0; insert element after head.
+class Solution {
+    Node addNode(Node head, int p, int x) {
+        if(p==-1 || head==null){
+            Node newNode = new Node(x);
+            if(head != null) head.prev = newNode;
+            newNode.next = head;
+            return newNode;
+        }
+        Node temp = head;
+        int count = 0;
+        while(temp != null){
+            if(count == p){
+                Node next = temp.next;
+                Node newNode = new Node(x);
+                temp.next = newNode;
+                newNode.prev = temp;
+                newNode.next = next;
+            }
+            count += 1;
+            temp = temp.next;
+        }
+        return head;
+    }
+}
+
+Delete node from DLL at position x (1-based indexing) - O(n)
+class Solution {
+    public Node deleteNode(Node head, int x) {
+        if(x == 1){
+            head = head.next;
+            head.prev = null;
+            return head;
+        }
+        Node temp = head;
+        int count = 1;
+        while(temp != null){
+            if(count == x){
+                if(temp.prev != null) temp.prev.next = temp.next;
+                if(temp.next != null) temp.next.prev = temp.prev;
+                return head;
+            }
+            count += 1;
+            temp = temp.next;
+        }
+        return head;
+    }
+}
+
+Reverse a DLL - Change next to prev and prev to next.
+class Solution {
+    public DLLNode reverseDLL(DLLNode head) {
+        DLLNode temp = head;
+        while(temp.next != null){
+            DLLNode currPrev = temp.prev;
+            DLLNode currNext = temp.next;
+            temp.prev = currNext;
+            temp.next =  currPrev;
+            temp = currNext;
+        }
+        temp.next = temp.prev;
+        temp.prev = null;
+        return temp;
+    }
+}
+
+Delete all occurrences of element in DLL - O(n)
+class Solution {
+    static Node deleteAllOccurOfX(Node head, int x) {
+        Node dummyHead = new Node();
+        dummyHead.prev = null;
+        dummyHead.next = head;
+        head.prev = dummyHead;
+        
+        Node temp = head;
+        while(temp != null){
+            if(temp.data == x){
+                if(temp.prev != null) temp.prev.next = temp.next;
+                if(temp.next != null) temp.next.prev = temp.prev;
+            }
+            temp = temp.next;
+        }
+        dummyHead.next.prev = null;
+        return dummyHead.next;
+    }
+}
+
+2 Sum in sorted DLL - Find all pairs whose target equals k.
+class Solution {
+    public static ArrayList<ArrayList<Integer>> findPairsWithGivenSum(int target, Node head) {
+        ArrayList<ArrayList<Integer>> ans = new ArrayList<>();
+        Node startPointer = head;
+        Node temp = head;
+        while(temp.next != null){
+            temp = temp.next;
+        }
+        Node endPointer = temp;
+        while(startPointer != endPointer){
+            int currSum = startPointer.data + endPointer.data;
+            if(currSum == target){
+                ans.add(new ArrayList<>(Arrays.asList(startPointer.data, endPointer.data)));
+                startPointer = startPointer.next;
+            }
+            else if(currSum > target){
+                endPointer = endPointer.prev;
+            }else{
+                startPointer = startPointer.next;
+            }
+        }
+        return ans;
+    }
+}
