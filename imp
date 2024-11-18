@@ -1,0 +1,34 @@
+sub-array -
+prefix sum - can be used for sub-array sum, sub-array xor*** - map will be used to store prefix sums.
+If we know input will be A-Z or a-z, then if we had to use map, we can check if we can use hashArr of len 26 with hashArr[i-'A']
+brute force for finding sub-arrays/sub-strings - 2 loops
+for(int i=0; i<n; i++){
+  int sum =0;
+  for(int j=i; j<n; j++){
+    sum += arr[j]; //all sub-arrays starting from i till j with len j-i+1.
+  }
+}
+All positives - maxLen, count where sum=k, sliding Window
+All non-negatives - maxLen slidingWindow, count - func(k)-func(k-1)
+Any num - maxSum using kadane's algo, target Sum with prefix Sum using Map with sum& index, count with prefix Sum using map with sum & frequency.
+kadane's algo - set sum as 0 if it becomes negative and continue. what if all are negatives ? Check if max is -ve.
+
+Sorting - quick sort, quick select, merge sort
+
+trees - height, validBST, LCA, 
+
+DP - sub-sequence (by taking, by not taking)
+
+DLL - LRU/ LFU
+
+Heaps - 
+Sliding window median, Sliding window movingAvg, Merge K sorted arrays
+
+Stack -
+next greater element, prev greater element, next smaller element, prev smaller element
+
+Queue - sliding window max
+
+Binary Search - Median of 2 sorted arrays, kth element of 2 sorted arrays
+
+Graphs -
