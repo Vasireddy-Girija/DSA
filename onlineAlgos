@@ -4,42 +4,40 @@ median - heaps -
 Brute force - Use insertion sort to sort the array as and when new element is getting added.
 Optimised - Use heaps.
 class MedianFinder {
-    PriorityQueue<Integer> maxHeap = new PriorityQueue<>(Collections.reverseOrder());
-    PriorityQueue<Integer> minHeap = new PriorityQueue<>(); //store more num of elements than maxHeap.
+    PriorityQueue<Integer> maxHeap;//1st half, contains less elements
+    PriorityQueue<Integer> minHeap;//2nd half, contains more elements
     public MedianFinder() {
-        
+        maxHeap = new PriorityQueue<>(Collections.reverseOrder());
+        minHeap = new PriorityQueue<>();
     }
     
     public void addNum(int num) {
-        if(minHeap.size()==0){
+        if(minHeap.size()==0) {
             minHeap.add(num);
             return;
         }
-        if(minHeap.size()==maxHeap.size()){
-            if(maxHeap.peek()>num){
-                maxHeap.add(num);
-                minHeap.add(maxHeap.poll());
-            }else{
-                minHeap.add(num);
-            }
-            return;
+        if(num >= minHeap.peek()){
+            minHeap.add(num);
+        }else{
+            maxHeap.add(num);
         }
-        if(minHeap.size()==maxHeap.size()+1){
-            if(maxHeap.size()>0 && maxHeap.peek()>num){
-                maxHeap.add(num);//makes heaps same size
-            }else{
-                minHeap.add(num);
-                maxHeap.add(minHeap.poll());
-            }
+        while(maxHeap.size()>minHeap.size()){
+            int currVal = maxHeap.poll();
+            minHeap.add(currVal);
+        }
+        while(minHeap.size()-maxHeap.size()>1){
+            int currVal = minHeap.poll();
+            maxHeap.add(currVal);
         }
     }
     
     public double findMedian() {
-        if(minHeap.size()==maxHeap.size()) return (((double)minHeap.peek())+maxHeap.peek())/2;
+        if(maxHeap.size()==minHeap.size()){
+            return ((double)(maxHeap.peek()+minHeap.peek()))/2;
+        }
         return minHeap.peek();
     }
 }
-
 
 kth smallest/ largest - heaps
 min of set of numbers where we add and remove elements - minStack, minHeap
