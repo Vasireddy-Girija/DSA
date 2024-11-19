@@ -10,6 +10,64 @@ class Node{
   }
 }
 
+****************LRU Cache*******************
+class DLLNode{
+    int key; //imp as we should have this key to remove from map when capacity exceeded.
+    int value; 
+    DLLNode prev;
+    DLLNode next;
+    DLLNode(int key, int value){
+        this.key = key;
+        this.value = value;
+    }
+}
+class LRUCache {
+    int capacity;
+    DLLNode head; //head pointer is imp as we will add to head.next everytime we use get or put.
+    DLLNode tail; //tail pointer is imp as we will remove from tail.prev if capacity exceeded.
+    Map<Integer, DLLNode> DLLNodeMap = new HashMap<>(); //size of map will be same as current capacity. Imp to get exact location of node.
+    public LRUCache(int capacity) {
+        this.capacity = capacity;
+        head = new DLLNode(-1, -1);//For insert and remove to be simpler.
+        tail = new DLLNode(-1, -1);//For insert and remove to be simpler.
+        head.next = tail;
+        tail.prev = head;
+    }
+    public void remove(DLLNode node){
+        node.prev.next = node.next;
+        node.next.prev = node.prev;
+    }
+    public void insertAtHead(DLLNode node){
+        node.next = head.next;
+        head.next.prev = node;
+        node.prev = head;
+        head.next = node;
+    }
+    public int get(int key) {
+        if(DLLNodeMap.containsKey(key)){
+            DLLNode currNode = DLLNodeMap.get(key);
+            remove(currNode);
+            insertAtHead(currNode);
+            return currNode.value;
+        }
+        return -1;
+    }
+    
+    public void put(int key, int value) {
+        if(DLLNodeMap.containsKey(key)){
+            DLLNode currNode = DLLNodeMap.get(key);
+            remove(currNode);
+        }
+        DLLNode newNode = new DLLNode(key, value);
+        insertAtHead(newNode);
+        DLLNodeMap.put(key, newNode);
+        if(DLLNodeMap.size()>capacity){
+            DLLNodeMap.remove(tail.prev.key);
+            remove(tail.prev);
+        }
+    }
+}
+
 Construct a DLL from array -
 class Solution {
     Node constructDLL(int arr[]) {
