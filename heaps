@@ -256,3 +256,39 @@ class Solution {
 }
 
 median in an array, in a stream (median of odd numbers is at index n/2, median of even numbers is at index n/2, n/2+1)
+Median in stream -
+class MedianFinder {
+    PriorityQueue<Integer> maxHeap;
+    PriorityQueue<Integer> minHeap;
+    public MedianFinder() {
+        maxHeap = new PriorityQueue<>(Collections.reverseOrder());
+        minHeap = new PriorityQueue<>();
+    }
+    
+    public void addNum(int num) {
+        if(minHeap.size()==0) {
+            minHeap.add(num);
+            return;
+        }
+        if(num >= minHeap.peek()){
+            minHeap.add(num);
+        }else{
+            maxHeap.add(num);
+        }
+        while(maxHeap.size()>minHeap.size()){
+            int currVal = maxHeap.poll();
+            minHeap.add(currVal);
+        }
+        while(minHeap.size()-maxHeap.size()>1){
+            int currVal = minHeap.poll();
+            maxHeap.add(currVal);
+        }
+    }
+    
+    public double findMedian() {
+        if(maxHeap.size()==minHeap.size()){
+            return ((double)(maxHeap.peek()+minHeap.peek()))/2;
+        }
+        return minHeap.peek();
+    }
+}
