@@ -102,7 +102,9 @@ String[] str1 = str.split(",");
 str2 = str.trim(); - remove leading and tailing empty spaces. Empy spaces in between the string will not be removed.
 
 StringBuilder - mutable, not thread safe
-
+reverse a string - new StringBuilder(str).reverse().toString();
+StringBuilder str = new StringBuilder();
+str.append(s) //where s is also string.
 
 
 Iterator -
