@@ -129,12 +129,11 @@ Children Sum property - check if root.val is sum of children val. Leaf node is v
 class Solution
 {
     public static int recFunc(Node root){
+        if(root == null) return 0;
         if(root.left == null && root.right == null) return root.data;
-        int leftNode = 0;
-        if(root.left != null) leftNode = recFunc(root.left);
+        int leftNode = leftNode = recFunc(root.left);
         if(leftNode == -1) return -1;
-        int rightNode = 0;
-        if(root.right != null) rightNode = recFunc(root.right);
+        int rightNode = recFunc(root.right);
         if(rightNode == -1) return -1;
         if(root.data == leftNode + rightNode) return root.data;
         return -1;
