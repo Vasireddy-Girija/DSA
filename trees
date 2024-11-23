@@ -147,6 +147,40 @@ class Solution
         return 1;
     }
 }
+
+Get max BST sie in a Binary tree -
+Brute force - Do preorder and for each node, check if it is valid BST.
+Optimised - check for left, check for right and combine it. (alternate to post-order)
+class MinMaxSize{
+    int min;
+    int max;
+    int size;
+    public MinMaxSize(int min, int max, int size){
+        this.min = min;
+        this.max = max;
+        this.size = size;
+    }
+}
+class Solution{
+    
+    static MinMaxSize recFunc(Node root){
+        if(root == null){
+            return new MinMaxSize(Integer.MAX_VALUE, Integer.MIN_VALUE, 0);
+        }
+        MinMaxSize left = recFunc(root.left);
+        MinMaxSize right = recFunc(root.right);
+        if(left.max < root.data && right.min > root.data) {
+               return new MinMaxSize(Math.min(left.min, root.data), Math.max(root.data, right.max), 1+left.size+right.size);
+        }
+        return new MinMaxSize(Integer.MIN_VALUE, Integer.MAX_VALUE, Math.max(left.size, right.size));
+    }
+    static int largestBst(Node root)
+    {
+        MinMaxSize ans = recFunc(root);
+        return ans.size;
+    }
+    
+}
 ####################################################################################################################
 Boundary Traversal
 Vertical order Traversal
