@@ -1,3 +1,19 @@
+14 leetcode patterns -
+Sliding window - 
+Two pointers
+Slow & fast pointers
+Linked list reversal
+Binary search
+Top k elements
+Binary tree traversal
+Graph traversal
+Backtracking
+Dynamic programming
+Bit manipulation
+Overlapping intervals
+monotonic stack
+prefix sum
+
 Fast and Slow pointers -
 1.Find if linked list has a cycle.
 2.Find mid element of linked list
