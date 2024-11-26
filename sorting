@@ -30,6 +30,14 @@ Element after pivot element should be greater than pivot element.
 
 5.Merge sort - Divide the array into 2 halves hypothetically and sort them and combine the two parts.
 
+Merge sort variations -
+1.Given two sorted arrays, find pairs such that arr1[i]>arr2[j]. 
+This is a sub-problem to find all pairs of a single array where arr[i]>arr[j] and i<j, this array arr is not sorted.
+
+2.Given two sorted arrays, find pairs such that arr1[i]>2*arr2[j]. 
+This is a sub-problem to find all pairs of a single array where arr[i]>2*arr[j] and i<j, this array arr is not sorted.
+
+
 Java
 Collections.sort(lst) -> Sorts lst in ascending order
 Collections.sort(lst, Collections.reverseOrder()) -> Sorts lst in descending order
