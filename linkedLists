@@ -184,3 +184,41 @@ public class Solution {
         return null;
     }
 }
+############################################################################################
+Rotate a LinkedList by k places -
+Find tail. Find (n-k)th element. Add tail to head. Make (n-k-1)th next ndoe to null. Return new head as (n-k)th element.
+class Solution {
+    public ListNode getKthNode(ListNode head, int k){
+        int count = 0;
+        ListNode prev = null;
+        while(count < k){
+            prev = head;
+            head = head.next;
+            count += 1;
+        }
+        return prev;
+    }
+    public int getLengthOfLinkedList(ListNode head){
+        int count = 0;
+        while(head != null){
+            count += 1;
+            head = head.next;
+        }
+        return count;
+    }
+    public ListNode rotateRight(ListNode head, int k) {
+        if(head == null) return head;
+        int l = getLengthOfLinkedList(head);
+        k = k % l;
+        if(k==0) return head;
+        ListNode tail = head;
+        while(tail.next != null){
+            tail = temp.next;
+        }
+        ListNode kthNode = getKthNode(head, l-k);
+        ListNode newHead = kthNode.next;
+        tail.next = head;
+        kthNode.next = null;
+        return newHead;
+    }
+}
