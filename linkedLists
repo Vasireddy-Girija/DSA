@@ -143,7 +143,7 @@ class Solution {
             slow = slow.next;
             if(fast == slow) break;
         }
-        if(fast==null || fast.next==null) return 0;
+        if(fast==null || fast.next==null) return 0; //Don't check for slow != fast as it fails for single element in LinkedList.
         int cnt=1;
         Node next = fast.next;
         while(next != slow){
