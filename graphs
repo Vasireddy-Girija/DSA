@@ -299,6 +299,23 @@ If ultimate parent of u and v are same, then u & v belong to same component.
 While getting ultimate parent, do path compression so that we can get ultimate parent in constant time, 
 otherwise it will take logN time to get ultimate parent.
 
+//Union without rank or size. Not efficient as we might not find parent in logN.
+class GfG
+{
+	int find(int A[],int X)
+        {
+          if(A[X]==X) return X;
+          return A[X] = find(A, A[X]);
+	}
+	void unionSet(int A[],int X,int Z)
+        {
+         int ulp_x = find(A, X);
+         int ulp_z = find(A, Z);
+         if(ulp_x == ulp_z) return;
+         A[ulp_x] = ulp_z;
+	}
+}
+
 We can create Disjoint set by - rank, size
 rank - rank is more if size of the component is more.
 size - total number of nodes in the component.
