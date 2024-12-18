@@ -44,3 +44,7 @@ class Solution {
         return k;
     }
 }
+
+Second largets num - case-1 : can be same as first largest, case -2 : should be different from first largest.
+While setting secondLargest to arr[i], check if firstLargest != secondLargest.
+
