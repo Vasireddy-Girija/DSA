@@ -28,6 +28,39 @@ Take element from second array and put in first array such that first array main
 Elements before pivot element should be less than or equal to pivot element.
 Element after pivot element should be greater than pivot element.
 
+****Questions similar to partition of Quick Sort algo where 2 points start at the beginning -
+Remove duplicates from array
+class Solution {
+    public int removeDuplicates(int[] nums) {
+        int n = nums.length;
+        int idx = 0;
+        for(int i=0; i<n; i++){
+            if(nums[i] != nums[idx]){
+                nums[idx+1] = nums[i];
+                idx = idx+1;
+            }
+        }
+        return idx+1;
+    }
+}
+Move zeros to end -
+class Solution {
+    public void moveZeroes(int[] nums) {
+        int n = nums.length;
+        int idx = 0;
+        for(int i=0; i<n; i++){
+            if(nums[i] != 0){
+                nums[idx] = nums[i];
+                idx += 1;
+            }
+        }
+        for(int i=idx; i<n; i++){
+            nums[i] = 0;
+        }
+    }
+}
+
+
 5.Merge sort - Divide the array into 2 halves hypothetically and sort them and combine the two parts.
 
 Merge sort variations -
