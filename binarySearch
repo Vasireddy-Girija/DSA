@@ -75,6 +75,19 @@ Count num of occurrences of element in sorted array - find firstOccurrence, do c
 ans will be lastOccurrence-firstOccurrence+1;
 
 Rotated sorted array -
+Check if array is rotated sorted array - If we have more than 1-inversion, then it is not raotated sorted array.
+class Solution {
+    public boolean check(int[] nums) {
+        int n = nums.length;
+        int inversions = 0;
+        for(int i=0; i<n; i++){
+            if(nums[i] > nums[(i+1)%n]) inversions += 1; //We are checking if last element is less than first element.
+            if(inversions > 1) return false;
+        }
+        return true;
+    }
+}
+
 1.Distinct values -
 class Solution {
     public int search(int[] nums, int target) {
