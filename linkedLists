@@ -111,7 +111,58 @@ public ListNode reverseLL(ListNode head){
         return newNode;
     }
 
-Reverse group of K LL -
+***Rotate a LL by k places to the right - (reverse 3 times)
+Find n i.e; total len of LL. Do k=k%n. reverse(n-k), reverse(last k) and then reverse complete LL.
+class Solution {
+    public int lenOfLL(ListNode head){
+        if(head==null) return 0;
+        int count=0;
+        while(head != null){
+            count += 1;
+            head = head.next;
+        }
+        return count;
+    }
+    public ListNode getKthNode(ListNode head, int k){
+        if(head==null) return null;
+        int count=0;
+        while(head != null){
+            count += 1;
+            if(count==k) return head;
+            head=head.next;
+        }
+        return null;
+    }
+    public ListNode reverseLL(ListNode head){
+        if(head==null || head.next==null) return head;
+        ListNode prev=null;
+        ListNode curr=head;
+        while(curr != null){
+            ListNode next = curr.next;
+            curr.next=prev;
+            prev=curr;
+            curr=next;
+        }
+        return prev;
+    }
+    public ListNode rotateRight(ListNode head, int k) {
+        int n = lenOfLL(head);
+        if(n==0) return null;
+        k = k%n;
+        if(k==0) return head;
+        ListNode kthNode = getKthNode(head, n-k);
+        ListNode nextNode = kthNode.next;
+        kthNode.next = null;
+        ListNode dummy = new ListNode(-1);
+        ListNode temp = dummy;
+        dummy.next = reverseLL(head);
+        dummy = head;
+        dummy.next = reverseLL(nextNode);
+        return reverseLL(temp.next);
+    }
+}
+
+***Reverse group of K LL -
 class Solution {
     public ListNode getKthNode(ListNode head, int k){
         if(head==null || k==0)return null;
@@ -149,7 +200,7 @@ class Solution {
     }
 }
 
-Merge 2 sorted LL - No extra space needed.
+***Merge 2 sorted LL - No extra space needed.
  public ListNode merge(ListNode leftNode, ListNode rightNode){
         ListNode dummy = new ListNode(-1);
         ListNode temp = dummy;
@@ -173,7 +224,7 @@ Merge 2 sorted LL - No extra space needed.
     }
 
 
-Sort a linked list -
+***Sort a linked list - We use mergeSort - TC-O(nlogn)
 class Solution {
     public ListNode getMiddleElement(ListNode head){
         ListNode fast = head.next;
