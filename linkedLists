@@ -101,6 +101,44 @@ class Solution {
     }
 }
 
+Reverse group of K LL -
+class Solution {
+    public ListNode getKthNode(ListNode head, int k){
+        if(head==null || k==0)return null;
+        int count = 0;
+        while(head != null){
+            count += 1;
+            if(count==k) return head;
+            head=head.next;
+        }
+        return null;
+    }
+    public ListNode reverseLL(ListNode head){
+        if(head==null || head.next==null) return head;
+        ListNode front = head.next;
+        ListNode newNode = reverseLL(front);
+        front.next = head;
+        head.next = null;
+        return newNode;
+    }
+    public ListNode reverseKGroup(ListNode head, int k) {
+        ListNode dummy = new ListNode(-1);
+        ListNode temp = dummy;
+        ListNode kthNode = getKthNode(head, k);
+        ListNode nextHead=head;
+        while(kthNode != null){
+            nextHead=kthNode.next;
+            kthNode.next = null;
+            dummy.next = reverseLL(head);
+            dummy=head;
+            head=nextHead;
+            kthNode = getKthNode(head, k);
+        }
+        dummy.next = nextHead;
+        return temp.next;
+    }
+}
+
 Sort a linked list -
 ############################################################################################
 Tortoise-hare method -
