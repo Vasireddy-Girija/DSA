@@ -1,0 +1,42 @@
+Character.isLetterOrDigit(char)
+
+public static int precedence(char ch){
+        if(ch=='+' || ch=='-') return 1;
+        if(ch=='*' || ch=='/') return 2;
+        if(ch=='^') return 3;
+        return -1;
+    }
+
+Infix to postfix - Infix can have ( or ). Postfix will not have. Use a stack for operators. 
+pop from stack util currChar > top of stack. If currChar is *, then stack top can have +or-. 
+If stack top is + and currChar is -, remove stack top before we put - in stack as + and - have same precedence.
+
+class Solution {
+    public static String infixToPostfix(String s) {
+        StringBuilder str = new StringBuilder();
+        Stack<Character> stk = new Stack<>();
+        for(int i=0; i<s.length(); i++){
+            char currChar = s.charAt(i);
+            if(Character.isLetterOrDigit(currChar)){
+                str.append(currChar);
+            }else{
+                if(currChar == '(') stk.add(currChar);
+                else if(currChar == ')'){
+                    while(stk.peek() != '('){
+                        str.append(stk.pop());
+                    }
+                    stk.pop();
+                }else{
+                    while(!stk.isEmpty() && precedence(currChar)<=precedence(stk.peek())){
+                        str.append(stk.pop());
+                    }
+                    stk.add(currChar);
+                }
+            }
+        }
+        while(!stk.isEmpty()){
+            str.append(stk.pop());
+        }
+        return str.toString();
+    }
+}
