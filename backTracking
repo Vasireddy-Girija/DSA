@@ -1,0 +1,54 @@
+M coloring problem - TC - M^E.
+**Don't add self-loops.
+**Check if all components can be colored.
+class Solution {
+    List<List<Integer>> getAdjList(List<int[]> edges, int v){
+        List<List<Integer>> ans = new ArrayList<>();
+        for(int i=0; i<v; i++){
+            ans.add(new ArrayList<>());
+        }
+        for(int[] edge: edges){
+            if(edge[0]==edge[1]) continue; //Don't add self-loops as edges.
+            ans.get(edge[0]).add(edge[1]);
+            ans.get(edge[1]).add(edge[0]);
+        }
+        return ans;
+    }
+    boolean recFunc(List<List<Integer>> adjList, int u, int m, int[] visited){
+        for(int i=0; i<m; i++){
+            boolean atleastOneNotVisited=false;
+            boolean cantBeSet=false;
+            for(int v: adjList.get(u)){
+                if(visited[v]==i) {
+                    cantBeSet = true;
+                    break;
+                }
+                if(visited[v]==-1) atleastOneNotVisited=true;
+            }
+            if(cantBeSet) continue;
+            visited[u]=i;
+            if(!atleastOneNotVisited) return true;
+            for(int v: adjList.get(u)){
+                if(visited[v]!=-1) continue;
+                if(recFunc(adjList, v, m, visited)) return true;
+            }
+            visited[u]=-1;
+        }
+        return false;
+        
+    }
+    boolean graphColoring(int v, List<int[]> edges, int m) {
+        List<List<Integer>> adjList = getAdjList(edges, v);
+        int[] visited = new int[v];
+        Arrays.fill(visited, -1);
+        boolean ans = true;
+        //every component should satisfy the condition.
+        for(int i=0; i<v; i++){
+            if(visited[i]==-1){
+                ans = ans && recFunc(adjList, i, m, visited);
+            }
+            if(!ans) return false;
+        }
+        return true;
+    }
+}
