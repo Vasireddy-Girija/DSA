@@ -149,7 +149,74 @@ class Solution {
     }
 }
 
+Merge 2 sorted LL - No extra space needed.
+ public ListNode merge(ListNode leftNode, ListNode rightNode){
+        ListNode dummy = new ListNode(-1);
+        ListNode temp = dummy;
+        while(leftNode != null && rightNode != null){
+            if(leftNode.val < rightNode.val){
+                dummy.next = leftNode;
+                leftNode = leftNode.next;
+            }else{
+                dummy.next = rightNode;
+                rightNode = rightNode.next;
+            }
+            dummy = dummy.next;
+        }
+        if(leftNode != null){
+            dummy.next = leftNode;
+        }
+        if(rightNode != null){
+            dummy.next = rightNode;
+        }
+        return temp.next;
+    }
+
+
 Sort a linked list -
+class Solution {
+    public ListNode getMiddleElement(ListNode head){
+        ListNode fast = head.next;
+        ListNode slow = head;
+        while(fast != null && fast.next != null){
+            fast = fast.next.next;
+            slow = slow.next;
+        }
+        return slow;
+    }
+    public ListNode merge(ListNode leftNode, ListNode rightNode){
+        ListNode dummy = new ListNode(-1);
+        ListNode temp = dummy;
+        while(leftNode != null && rightNode != null){
+            if(leftNode.val < rightNode.val){
+                dummy.next = leftNode;
+                leftNode = leftNode.next;
+            }else{
+                dummy.next = rightNode;
+                rightNode = rightNode.next;
+            }
+            dummy = dummy.next;
+        }
+        if(leftNode != null){
+            dummy.next = leftNode;
+        }
+        if(rightNode != null){
+            dummy.next = rightNode;
+        }
+        return temp.next;
+    }
+    public ListNode sortList(ListNode head) {
+        if(head==null || head.next == null) return head; //single element
+        ListNode middle = getMiddleElement(head);//middle should not be null.
+        ListNode leftHead = head;
+        ListNode rightHead = middle.next;
+        middle.next = null;
+        ListNode newLeftHead = sortList(leftHead);
+        ListNode newRightHead = sortList(rightHead);
+        ListNode newHead = merge(newLeftHead, newRightHead);
+        return newHead;
+    }
+}
 ############################################################################################
 Tortoise-hare method -
 1.Find middle element in a linked list
