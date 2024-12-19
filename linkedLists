@@ -101,6 +101,16 @@ class Solution {
     }
 }
 
+Reverse LL - Recursive 
+public ListNode reverseLL(ListNode head){
+        if(head==null || head.next==null) return head;
+        ListNode front = head.next;
+        ListNode newNode = reverseLL(front);
+        front.next = head;
+        head.next = null;
+        return newNode;
+    }
+
 Reverse group of K LL -
 class Solution {
     public ListNode getKthNode(ListNode head, int k){
