@@ -2,3 +2,12 @@
 Take 2 pointers starting at index 0 for str1, str2 and check. Here m & n are len of str1 and str2 respectively.
 
 1.Check if a string can be a palindrome by max removing one character from it.
+
+syntax -
+Character.isLetterOrDigit(char)
+public boolean isLetterOrDigit(char ch){
+  if((ch>='a' && ch<='z') || (ch>='A' && ch<='Z') || (ch>='0' && ch<='9')) return true;
+  return false;
+
+char ch = 'a';
+String str = "a";
