@@ -1,0 +1,13 @@
+Auto-complete for phone keyboard -
+Use a trie - Map<Char, Node>
+After prefix matches, use a BFS to complete all possibilities.
+TC - 26^N
+
+Shuffle playlist -
+Take a map, for each player, take a list of his songs.
+make list such that small lists add to each other such that they match length of longest list of a player.
+Choose one from each list. We can add randomness by choosing row and column.
+
+Photos slideshow - simple
+
+spell checker - o through it again
