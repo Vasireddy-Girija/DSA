@@ -29,7 +29,7 @@ check if we repeat adding it. Generally if we have distance array, we don't need
 For finding shortest paths, if we use queue(for unit weights), if we store distance as part of queue entry, we should use visited as we will not maintain distance array.
 ***IMP - For Dijkstra, put dst as dst from src in priorityQueue and not wt.
 
-Traversal- We need visited arrays for both directed & un-directed traversals.
+Traversal- We need visited arrays for both directed(as we might have cycles) & un-directed traversals.
 BFS - O(V+2E) for un-directed and O(V+E) for directed graphs.
 public void bfs(int node, List<List<Integer>> adj, boolean[] visited){
         Queue<Integer> q = new LinkedList<>();
