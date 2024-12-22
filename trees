@@ -21,7 +21,42 @@ DFS - inOrder, preOrder, postOrder
 *If we have preOrder & postOrder traversals, we cannot construct a unique binary tree, we can construct multiple trees.
 
 BFS - levelOrder
+class Solution {
+    public List<List<Integer>> levelOrder(TreeNode root) {
+        Queue<TreeNode> queue = new LinkedList<>();
+        List<List<Integer>> ansLst = new ArrayList<>();
+        if(root == null) return ansLst;
+        queue.add(root);
+        while(!queue.isEmpty()){
+            int n = queue.size();
+            List<Integer> levelLst = new ArrayList<>();
+            for(int i=0; i<n; i++){
+                TreeNode curr = queue.poll();
+                levelLst.add(curr.val);
+                if(curr.left != null) queue.add(curr.left);
+                if(curr.right != null) queue.add(curr.right);
+            }
+            ansLst.add(levelLst);
+        }
+        return ansLst;
+    }
+}
 
+Create a complete binary tree from array - children 2*i+1, 2*i+2 where parent is i.
+class Solution{
+    public static Node getNode(ArrayList<Integer> v, int idx, int n){
+        if(idx >= n) return null;
+        Node newNode = new Node(v.get(idx));
+        newNode.left = getNode(v, 2*idx+1, n);
+        newNode.right = getNode(v, 2*idx+2, n);
+        return newNode;
+    }
+    public static void createTree(ArrayList<Integer> v ){
+        int n = v.size();
+        Node root = getNode(v, 0, n);
+        return root;
+    }
+}
 ####################################################################################################################
 Find height of binary tree -
 public int maxHeight(TreeNode root){
