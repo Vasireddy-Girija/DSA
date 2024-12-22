@@ -164,7 +164,7 @@ adjacency list for weighted graph - u -> ({v, wt}, {w, wt})
 dst[src] = 0
 
 For shortest paths, visited array is not needed. We will iterate till queue is empty.
-Shortest path of Undirected graph with unit weights - Use a queue (put [node,dst] in queue), dst array
+Shortest path of Undirected graph with unit weights - Use a queue (put [node,dst] in queue with vis array) or (put [node] with dst array)
 Shortest path of Undirected graph with non-negative weights - 
      Use a priority queue (put [dst from src node, node]), dst array.
      We can use queue. But it will take multiple iterations.
