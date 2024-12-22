@@ -14,7 +14,7 @@ adjacency list - List<List<Integer>>
 ***IMP
 For Directed graphs, adjList.get(u).add(v);
 For Un-directed graphs, adjList.get(u).add(v); adjList.get(v).add(u);
-****If vertices are not numbers, use map as adjList where key is the vertex.
+****If vertices are not numbers, use map as adjList where key is the vertex and visited set instead of visited array.
 
 Components - Graphs that are not connected. Always do the traversals for all components.
 Ex:
