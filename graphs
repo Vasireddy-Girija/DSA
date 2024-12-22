@@ -118,6 +118,7 @@ BFS - can be done using topological sort Kahn's/indegree algorithm. DFS toposort
 Topological sort - Possible only for directed acyclic graphs.
 If there is an edge from a->b, then a should be done/ pre-requisite for b. So element with 0 indegree should be done first/ comes first in topoSort.
 DFS - What if we do a topo sort for directed cyclic graph? We get wrong topo sort order.
+We should check for all components using visted array to get topoSort of all components.
 public void dfs(int node, ArrayList<ArrayList<Integer>> adj, boolean[] visited, Stack<Integer> stk){
         visited[node] = true;
         for(int element : adj.get(node)){
