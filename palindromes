@@ -60,3 +60,35 @@ class Solution {
         return count;
     }
 }
+
+Given a string s, partition s such that every substring of the partition is a palindrome. Return all possible palindrome partitioning of s.
+TC - ?
+class Solution {
+    public boolean isPalindrome(String str, int startIdx, int endIdx){
+        while(startIdx<=endIdx){
+            if(str.charAt(startIdx) != str.charAt(endIdx)) return false;
+            startIdx += 1;
+            endIdx -= 1;
+        }
+        return true;
+    }
+    public void recFunc(String str, int startIdx, int endIdx, List<String> subAns, List<List<String>> ans){
+        if(startIdx > endIdx){
+            ans.add(new ArrayList<>(subAns));
+            return;
+        }
+        for(int i=startIdx; i<=endIdx; i++){
+            if(isPalindrome(str, startIdx, i)){
+                subAns.add(str.substring(startIdx, i+1));
+                recFunc(str, i+1, endIdx, subAns, ans);
+                subAns.remove(subAns.size()-1);
+            }
+        }
+    }
+    public List<List<String>> partition(String s) {
+        List<List<String>> ans = new ArrayList<>();
+        List<String> subAns = new ArrayList<>();
+        recFunc(s, 0, s.length()-1, subAns, ans);
+        return ans;
+    }
+}
