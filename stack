@@ -12,7 +12,140 @@ Prev smaller element - Since we want next elements, iterate from i=0 to i=n-1. S
 Don't store duplicate elements in stack for monotonic stack. If they ask net greater than or equal to or less than or equal to, then have duplicates.
 
 For monotonic stack problems, have an outer for loop looping i from start to end and inner while loop for logic for adding current element to stack.
+//We are storing index in stack instead of element.
+public int[] nextSmallerElement(int[] heights){
+        int n = heights.length;
+        int[] ans = new int[n];
+        Stack<Integer> stk = new Stack<>();
+        for(int i=n-1; i>=0; i--){
+            while(!stk.isEmpty() && heights[stk.peek()]>=heights[i]){
+                stk.pop();
+            }
+            if(stk.isEmpty()) ans[i]=n;
+            else ans[i] = stk.peek();
+            stk.add(i);
+        }
+        return ans;
+    }
+  public int[] prevSmallerElement(int[] heights){
+      int n = heights.length;
+      int[] ans = new int[n];
+      Stack<Integer> stk = new Stack<>();
+      for(int i=0; i<n; i++){
+          while(!stk.isEmpty() && heights[stk.peek()]>=heights[i]){
+              stk.pop();
+          }
+          if(stk.isEmpty()) ans[i]=-1;
+          else ans[i]=stk.peek();
+          stk.add(i);
+      }
+      return ans;
+  }
 If we want to consider elements in cyclic order, pre-fill the stack once by following same order the question needs (If nge/nse, go from i=n-1 to 1 else go from i=0 to i=n-1)
 After the above iteration, use the same stack for finding actucal nge/nse/pge/pse.
 
 If we want to find number of nge, then stk.size() will be the ans.
+
+Trap rain water -
+class Solution {
+    public int trap2(int[] height) {
+        int n = height.length;
+        int[] left = new int[n];
+        int[] right = new int[n];
+        int lMax = Integer.MIN_VALUE;
+        int rMax = Integer.MIN_VALUE;
+        for(int i=0; i<n; i++){
+            lMax = Math.max(lMax, height[i]);
+            rMax = Math.max(rMax, height[n-1-i]);
+            left[i] = lMax;
+            right[n-1-i] = rMax;
+        }
+        int ans = 0;
+        for(int i=0; i<n; i++){
+            ans += Math.min(left[i], right[i])-height[i];
+        }
+        return ans;
+    }
+
+    public int trap(int[] height){
+        int n = height.length;
+        int lMax = height[0];
+        int rMax = height[n-1];
+        int l=0;
+        int r=n-1;
+        int ans=0;
+        while(l<r){
+            lMax = Math.max(lMax, height[l]);
+            rMax = Math.max(rMax, height[r]);
+            if(height[l]<height[r]){
+                ans += lMax-height[l]; //lMax will be smaller than rMax.
+                l += 1;
+            }else{
+                ans += rMax-height[r]; //rMax will be smaller than lMax.
+                r -= 1;
+            }
+        }
+        return ans;
+    }
+}
+#####################################################################################
+Largest rectangle in histogram -
+If we don't want to include indices, count = rightIdx-leftIdx-1
+class Solution {
+    public int[] nextSmallerElement(int[] heights){
+        int n = heights.length;
+        int[] ans = new int[n];
+        Stack<Integer> stk = new Stack<>();
+        for(int i=n-1; i>=0; i--){
+            while(!stk.isEmpty() && heights[stk.peek()]>=heights[i]){
+                stk.pop();
+            }
+            if(stk.isEmpty()) ans[i]=n;
+            else ans[i] = stk.peek();
+            stk.add(i);
+        }
+        return ans;
+    }
+    public int[] prevSmallerElement(int[] heights){
+        int n = heights.length;
+        int[] ans = new int[n];
+        Stack<Integer> stk = new Stack<>();
+        for(int i=0; i<n; i++){
+            while(!stk.isEmpty() && heights[stk.peek()]>=heights[i]){
+                stk.pop();
+            }
+            if(stk.isEmpty()) ans[i]=-1;
+            else ans[i]=stk.peek();
+            stk.add(i);
+        }
+        return ans;
+    }
+    public int largestRectangleArea(int[] heights) {
+        int[] nextSmallerElementArr = nextSmallerElement(heights);
+        int[] prevSmallerElementArr = prevSmallerElement(heights);
+        int maxVal = 0;
+        for(int i=0; i<heights.length; i++){
+            maxVal = Math.max(maxVal, heights[i]*(nextSmallerElementArr[i]-prevSmallerElementArr[i]-1));
+        }
+        return maxVal;
+    }
+}
+
+We have an optimal solution, where we calculate while removing it from stack.
+class Solution {
+    public int largestRectangleArea(int[] heights) {
+        int n = heights.length;
+        Stack<Integer> stk = new Stack<>();
+        int maxVal = 0;
+        for(int i=0; i<=n; i++){ //We should pop all elements from stack. So looping for one extra time for i==n, which comes out when stk is empty.//Dry run for [2,3] to uderstand.
+            while(!stk.isEmpty() && (i==n || heights[stk.peek()]>=heights[i])){
+                int currTop = stk.pop();
+                int prevSmallestOfCurrTop = -1;
+                if(!stk.isEmpty()) prevSmallestOfCurrTop = stk.peek();
+                maxVal = Math.max(maxVal, (i-prevSmallestOfCurrTop-1)*heights[currTop]);
+            }
+            stk.add(i);
+        }
+        return maxVal;
+    }
+}
