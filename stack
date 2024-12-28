@@ -1,0 +1,18 @@
+Stack<Integer> stk = new Stack<>(); -> Last In First Out(LIFO) Data Structure.
+stk.peek() -> to get top element
+stk.pop() -> to get and remove top element
+stk.add(i) -> to add element to top of the stack
+
+Monotonic stack - stores elements of stack in increasing or decreasing order.
+Next greater element - Since we want next elements, iterate from i=n-1 to i=0. Since we want greater element, stack should have elements in decreasing order.
+Prev greater element - Since we want prev element, iterate from i=0 to i=n-1. Since we want greater element, stack should have elements in decreasing order.
+Next smaller element - Since we want next elements, iterate from i=n-1 to i=0. Since we want greater element, stack should have elements in increasing order.
+Prev smaller element - Since we want next elements, iterate from i=0 to i=n-1. Since we want greater element, stack should have elements in increasing order.
+
+Don't store duplicate elements in stack for monotonic stack. If they ask net greater than or equal to or less than or equal to, then have duplicates.
+
+For monotonic stack problems, have an outer for loop looping i from start to end and inner while loop for logic for adding current element to stack.
+If we want to consider elements in cyclic order, pre-fill the stack once by following same order the question needs (If nge/nse, go from i=n-1 to 1 else go from i=0 to i=n-1)
+After the above iteration, use the same stack for finding actucal nge/nse/pge/pse.
+
+If we want to find number of nge, then stk.size() will be the ans.
