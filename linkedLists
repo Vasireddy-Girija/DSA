@@ -107,7 +107,7 @@ public ListNode reverseLL(ListNode head){
         ListNode front = head.next;
         ListNode newNode = reverseLL(front);
         front.next = head;
-        head.next = null;
+        head.next = null; //imp
         return newNode;
     }
 
@@ -282,6 +282,11 @@ class Solution {
         return slow;
     }
 }
+If fast==null, then it is even length linkedList. If fast.next==null, then it is odd length linkedList.
+For even length, middle element will be n/2+1 and for odd elements, it is (n+1)/2.
+ie, for LL of length 4, mid element will point to 3 instead of 2.
+For LL of length 5, mid element will point to 3.
+Inorder for mid to point to 2 in even and 3 in odd, initialise, fast to head.next.(Use this for merge sort)
 
 2.Check if there is a cycle in linked-list
 public class Solution {
