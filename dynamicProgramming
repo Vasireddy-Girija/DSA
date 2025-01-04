@@ -15,7 +15,7 @@ Steps in any DP problem -
 Hints -
 1.No.of ways (all possibilities)
 2.Min or max with some conditions
-
+3.Is there any way which satisfies the condition (true/false)
 #################################################################################################################
 1D DP - one index
 1.Climbing Stairs - Person can take either 1 or 2 steps.
