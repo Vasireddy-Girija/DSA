@@ -174,6 +174,23 @@ class Solution {
 }
 ***In coin change, we have to initialise with Integer.MAX_VALUE and in knapsack, 
 we don't have to do it as our constraint is <= capacity(<=j) and not == capacity(==j).
+
+Rod cutting problem -
+Given a rod of length n(size of price) inches and an array of prices, price. 
+price[i] denotes the value of a piece of length i. 
+Determine the maximum value obtainable by cutting up the rod and selling the pieces
+class Solution {
+    public int cutRod(int[] price) {
+        int n = price.length;
+        int[] dp = new int[n+1];
+        for(int i=1; i<=n; i++){
+            for(int j=1; j<=i; j++){
+                dp[i] = Math.max(dp[i], price[j-1]+dp[i-j]);
+            }
+        }
+        return dp[n];
+    }
+}
 #################################################################################################################
 3D DP- 3 indexes
 
