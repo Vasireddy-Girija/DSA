@@ -243,6 +243,55 @@ class Solution {
         return prev[n-1];
     }
 }
+
+Find all LCS - 
+class Solution {
+    public int[][] generateDP(String s, String t){
+        int m = s.length();
+        int n = t.length();
+        int[][] dp = new int[m+1][n+1];
+        for(int i=1; i<=m; i++){
+            for(int j=1; j<=n; j++){
+                if(s.charAt(i-1)==t.charAt(j-1)){
+                    dp[i][j] = 1+dp[i-1][j-1];
+                }else{
+                    dp[i][j] = Math.max(dp[i-1][j], dp[i][j-1]);
+                }
+            }
+        }
+        return dp;
+    }
+    public void recFunc(int i, int j, String s, String t, int[][] dp, Set<String> ans, StringBuilder subAns){
+        if(i<= 0 || j<=0){
+            ans.add(subAns.reverse().toString());
+            subAns.reverse();
+            return;
+        }
+        if(dp[i][j]==dp[i-1][j-1]+1 && s.charAt(i-1) == t.charAt(j-1)){
+            subAns.append(s.charAt(i-1));
+            recFunc(i-1, j-1, s, t, dp, ans, subAns);
+            subAns.delete(subAns.length()-1, subAns.length());
+        }else{
+            if(dp[i][j] == dp[i-1][j]){
+                recFunc(i-1, j, s, t, dp, ans, subAns);
+            }
+            if(dp[i][j] == dp[i][j-1]){
+                recFunc(i, j-1, s, t, dp, ans, subAns);
+            }
+        }
+    }
+    public List<String> all_longest_common_subsequences(String s, String t) {
+        int[][] dp = generateDP(s, t);
+        int m=s.length();
+        int n=t.length();
+        Set<String> ans = new HashSet<>();
+        StringBuilder subAns = new StringBuilder();
+        recFunc(m, n, s, t, dp, ans, subAns);
+        List<String> sortedAns = new ArrayList<>(ans);
+        Collections.sort(sortedAns);
+        return sortedAns;
+    }
+}
 #################################################################################################################
 Longest Increasing Subsequence - (strictly increasing)
 recursion - we need prev_index to say if we can take next element or not.
