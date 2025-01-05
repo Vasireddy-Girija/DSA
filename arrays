@@ -85,5 +85,98 @@ class Solution {
         return maxLen;
     }
 }
+####################################################################################################################
+2 Sum
+3 Sum - 
+Optimal solution - 
+class Solution {
+    public List<List<Integer>> threeSum(int[] nums) {
+        Arrays.sort(nums);
+        int n = nums.length;
+        List<List<Integer>> ans = new ArrayList<>();
+        for(int i=0; i<n; i++){
+            if(i != 0 && nums[i]==nums[i-1]) continue;
+            int j = i+1;
+            int k = n-1;
+            while(j < k){
+                int currSum = nums[i]+nums[j]+nums[k];
+                if(currSum == 0){
+                    ans.add(new ArrayList<>(Arrays.asList(nums[i], nums[j], nums[k])));
+                    j += 1;
+                    k -= 1;
+                    while(j<k && nums[j]==nums[j-1]) j+=1;
+                    while(j<k && nums[k]==nums[k+1]) k-=1;
+                }else if(currSum > 0){
+                    k -= 1;
+                    while(j<k && nums[k]==nums[k+1]) k-=1;
+                }else{
+                    j+=1;
+                    while(j<k && nums[j]==nums[j-1]) j+=1;
+                }
+            }
+        }
+        return ans;
+    }
+}
+Other appoach - Not imp (Search for element within i and j)
+public class tUf {
+    public static List<List<Integer>> triplet(int n, int[] arr) {
+        Set<List<Integer>> st = new HashSet<>();
 
+        for (int i = 0; i < n; i++) {
+            Set<Integer> hashset = new HashSet<>();
+            for (int j = i + 1; j < n; j++) {
+                //Calculate the 3rd element:
+                int third = -(arr[i] + arr[j]);
 
+                //Find the element in the set:
+                if (hashset.contains(third)) {
+                    List<Integer> temp = Arrays.asList(arr[i], arr[j], third);
+                    temp.sort(null);
+                    st.add(temp);
+                }
+                hashset.add(arr[j]);
+            }
+        }
+
+        // store the set elements in the answer:
+        List<List<Integer>> ans = new ArrayList<>(st);
+        return ans;
+    }
+}
+##############################################################################
+4 Sum -
+class Solution {
+    public List<List<Integer>> fourSum(int[] nums, int target) {
+        Arrays.sort(nums);
+        int n = nums.length;
+        List<List<Integer>> ans = new ArrayList<>();
+        for(int i=0; i<n; i++){
+            if(i!=0 && nums[i]==nums[i-1]) continue;
+            for(int j=i+1; j<n; j++){
+                if(j!=i+1 && nums[j]==nums[j-1]) continue;
+                
+                int k=j+1;
+                int l=n-1;
+                while(k<l){
+                    long currSum = nums[i]+nums[j];
+                    currSum += nums[k]+nums[l];
+                    if(currSum == target){
+                        ans.add(new ArrayList<>(Arrays.asList(nums[i], nums[j], nums[k], nums[l])));
+                        k += 1;
+                        l -= 1;
+                        while(k<l && nums[k]==nums[k-1]) k+=1;
+                        while(k<l && nums[l]==nums[l+1]) l-=1;
+                    }else if(currSum < target){
+                        k += 1;
+                        while(k<l && nums[k]==nums[k-1]) k+=1;
+                    }else{
+                        l -= 1;
+                        while(k<l && nums[l]==nums[l+1]) l-=1;
+                    }
+                }
+            }
+        }
+        return ans;
+    }
+}
