@@ -1,4 +1,21 @@
 subArray sum - sliding window, subsequence sum - DP
+#######################################################
+Given an integer array nums, find the subarray with the largest sum, and return its sum. - Kadane's algo
+class Solution {
+    public int maxSubArray(int[] nums) {
+        int sum = 0;
+        int maxSum = Integer.MIN_VALUE;
+        for(int element : nums){
+            sum += element;
+            maxSum = Math.max(sum, maxSum);
+            if(sum < 0) {
+                sum = 0;
+            }
+        }
+        return maxSum;
+    }
+}
+#######################################################
 
 2 types -
 1.Find longest subArray whose sum = k 
