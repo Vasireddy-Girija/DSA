@@ -3,7 +3,7 @@ complete binary tree - So we can represent it as an array. And this array will h
 parent - i, left child - 2*i+1, right child - 2*i+2
 parent for child i - (i-1)/2
 operations - shiftUp, shiftDown(heapify), insert, extractMin, extractMax, delete, heapSort, createHeap
-leaf nodes - (n-2)/2 to n-1 (check this)
+leaf nodes - (n-1)/2 to n-1 (check this)
 
 Priority Queue - used to implement heaps (by default, it is a minHeap)
 PriorityQueue<Integer> pq = new PriorityQueue<>();
