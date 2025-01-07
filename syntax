@@ -1,13 +1,14 @@
 primitive data types(8) - byte, short, int, float, double, long, char, boolean
 
 Arrays - can be created for primitive & non-primitive data types.
-int[] arr = new arr[n]; where n is thetotal number of integers in the array.
+int[] arr = new int[n]; where n is the total number of integers in the array.
 Integer[] arr = new Integer[n];
 Length of arr - arr.length;
 Initialise all elements of arr with default value - Arrays.fill(arr, -1); here -1 is default value.
 For initialising 2D array, int dp[m][n], Use Arrays.fill for each row.
 for(int i=0; i<m; i++) Arrays.fill(dp[i], -1);
 int [][] twoDArray = { { 1, 2, 3 }, { 4, 5, 6 } };
+int[] arr = new int[]{0, 0}
 ArrayList<String> places = new ArrayList<>(Arrays.asList("Buenos Aires", "Córdoba", "La Plata"));
 
 List - List is an interface. Cannot create lists with primitives as it is not supported for Generics.
@@ -26,7 +27,7 @@ List<Integer> list = Arrays.stream(arr).boxed().collect(Collectors.toList());
 Sort methods sort the elements inplace.
 Collections.sort(Object List), Collections.sort(ObjList, Collections.reverseOrder());
 Arrays.sort(primitive array/Object array)
-For Object array, Arrays.sort(objArr, Colections.reverseOrder());
+For Object array, Arrays.sort(objArr, Collections.reverseOrder());
 For primitive array, Arrays.sort(primArr, Collections.reverseOrder()) will NOT work.
 
 Map -
@@ -100,6 +101,13 @@ Character - 'c', String - "c"
 str.substring(0,n) - str.subString(startIdx, endIdx+1)
 String[] str1 = str.split(",");
 str2 = str.trim(); - remove leading and tailing empty spaces. Empy spaces in between the string will not be removed.
+
+int a = 1;
+char ch = (char)(a+'0');
+String str = Integer.toString(a);
+
+char ch = 'a';
+int a = 'a'-'0'
 
 StringBuilder - mutable, not thread safe
 reverse a string - new StringBuilder(str).reverse().toString();
