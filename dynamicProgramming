@@ -87,7 +87,26 @@ static Boolean isSubsetSum(int arr[], int target) {
 }
 
 Count num of ways in which we can get target - num of ways by taking the element and number of ways without taking the element.
-Case-1: all elements are positives. case-2: elements are non-negatives.
+Case-1: all elements are positives. case-2: elements are non-negatives. case-3:elements are integers.
+For case-1 and case-2, we can use dp. For case-3, we should use recursion.-Can we do case-3 with DP ?
+class Solution {
+    public void recFunc(int idx, int[] nums, int target, int[] count){
+        if(target == 0 && idx == nums.length){ //If non-negatives,we should check for idx==n
+            count[0] += 1;
+            return;
+        }
+        if(idx == nums.length) return;
+        if(target < 0) return; //If negatives are present, we should remove this check.
+        recFunc(idx+1, nums, target-nums[idx], count);
+        recFunc(idx+1, nums, target, count);
+    }
+    public int perfectSum(int[] nums, int target) {
+        int[] count = new int[1];
+        recFunc(0, nums, target, count);
+        return count[0];
+    }
+}
+
 class Solution{
 	public int perfectSum(int arr[],int n, int sum) 
 	{ 
