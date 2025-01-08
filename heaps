@@ -145,6 +145,7 @@ class Solution {
     }
 }
 
+Given an expression 2x+2y, find first 25 
 Top k frequent elements -
 1.Heap - Use a map to get frequency of each element. Create min heap with k elements based on frequency. 
 For all remaining elements, if root has less frequency than current  element, poll it and add current element.
