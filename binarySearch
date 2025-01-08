@@ -34,6 +34,7 @@ class Solution {
 
 Find floor and ceil - In binary search also, return high at the end for floor and return low for ceil.
 If num don't exist, based on the search key, low can go to n and high can go to -1 and stop.
+If floor and ceil are asked for unsorted array, then just loop through the elements - O(n)
 
 Find the first and last occurrence of an element in sorted array-
 First find firstOccurrence. If firstOccurrence idx is in bounds and its value is same as target
