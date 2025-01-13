@@ -43,6 +43,8 @@ Types - HashMap, LinkedHashMap, TreeMap
 HashMap - no order - get, put , remove, containsKey() - O(1)
 LinkedHashMap - maintains insertion order - get, put , remove, containsKey() - O(1)
 TreeMap - maintains sorted order or order given by comparator. - put, get, contains, remove - O(logn)
+firstKey(), lastKey() gives smallest/ largest values based on comparator.
+Sometimes we can use TreeMap instead of priorityQueue in java as we cannot remove element in O(logn) in priorityQueue.
 TreeMap uses red-black tree which is a self-balancing binary search tree.
 
 Set - HashSet, LinkedHashSet, TreeSet
