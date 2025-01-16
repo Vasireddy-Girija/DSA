@@ -147,6 +147,18 @@ class Solution {
 
 Min. number of coins required to get a given sum - Initialise with Integer.MAX_VALUE
 class Solution {
+    public int recFunc(int idx, int amount, int[] coins){
+        if(amount == 0) return 0;
+        if(idx == coins.length) return Integer.MAX_VALUE;
+        int minCount = Integer.MAX_VALUE;
+        if(amount >= coins[idx]){
+            int ans = recFunc(idx, amount-coins[idx], coins);
+            if(ans != Integer.MAX_VALUE) ans = 1+ans;
+            minCount = Math.min(minCount, ans);
+        }
+        return Math.min(minCount, recFunc(idx+1, amount, coins));
+    }
+
     public int coinChange(int[] coins, int amount) {
         if(amount == 0) return 0;
         int n = coins.length;
