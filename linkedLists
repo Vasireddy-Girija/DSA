@@ -198,6 +198,15 @@ class Solution {
         dummy.next = nextHead;
         return temp.next;
     }
+  public ListNode reverseKGroup(ListNode head, int k) {
+        ListNode kthNode = getKthNode(head, k);
+        if(kthNode == null) return head;
+        ListNode next = kthNode.next;
+        kthNode.next = null;
+        ListNode newHead = reverseLL(head);
+        head.next = reverseKGroup(next, k);
+        return newHead;
+    }
 }
 
 ***Merge 2 sorted LL - No extra space needed.
