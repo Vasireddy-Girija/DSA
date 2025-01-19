@@ -300,6 +300,20 @@ class Solution {
     }
 }
 
+Count pairs whose diffrence is less than dist in sorted array -
+public int countNumberWithDifferenceLess(int diff, int k, int[] nums){
+        int l=0; 
+        int r=0;
+        int count = 0;
+        while(r < nums.length){
+            while(nums[r]-nums[l] > diff){
+                l += 1;
+            }
+            count += r-l;
+            r += 1;
+        }
+        return count;
+    }
 #############################
 Maximum Points You Can Obtain from Cards - You can remove carrds either from first or from right. You can take k cards.
 Find the max sum you get by taking k cards.
