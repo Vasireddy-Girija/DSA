@@ -11,3 +11,12 @@ public boolean isLetterOrDigit(char ch){
 
 char ch = 'a';
 String str = "a";
+
+public String sort(String str){
+    char[] chars = str.toCharArray();
+    Arrays.sort(chars);
+    return new String(chars);
+}
+
+Can we use Arrays.sort for primitive/ non-primitive types ?
+Can we use Collections.sort for primitive/ non-primitive types ?
