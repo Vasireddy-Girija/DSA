@@ -60,6 +60,8 @@ Doesn't allow null elements as elements needs to be compared for sorting.
 Union between 2 sets a,b - a.addAll(b)
 Intersection between 2 sets a,b - a.retainAll(b)
 Difference between 2 sets a,b - a.removeAll(b)
+Set<String> mySet = new HashSet<>(); mySet.addAll(Arrays.asList("element1", "element2", "element3"));
+    
 
 
 Queue - First In Last Out data structure (FIFO)
@@ -117,6 +119,9 @@ String str = Integer.toString(a);
 
 char ch = 'a';
 int a = 'a'-'0'
+
+int num = Integer.parseInt(str); //throws a NumberFormatException if the string is not a valid integer. 
+Integer numObj = Integer.valueOf(str); //throws a NumberFormatException if the string is not a valid integer. 
 
 StringBuilder - mutable, not thread safe
 reverse a string - new StringBuilder(str).reverse().toString();
