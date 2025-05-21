@@ -132,6 +132,9 @@ str.length() - for length of stringBuilder.
 remove last char - str.delete(str.length()-1, str.length())
 str.charAt(i) -> same for string and stringBuilder
 
+if(ch=='+'||ch=='-'||ch=='*'||ch=='/') -> == works for primitive types
+if(str.equals("+")||str.equals("-")||str.equals("*")||str.equals("/")) -> equals works for string objects. == doesn't work for objects.
+
 Iterator -
 
 
