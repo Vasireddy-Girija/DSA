@@ -67,7 +67,8 @@ Queue q = new LinkedList<>();
 q.isEmpty()
 q.size()
 q.add() //Adds at the back of queue.
-q.poll() - returns front element.
+q.poll() - returns front element and removes it.
+q.peek() -  returns front element.
 
 Stack - Last In First Out (LIFO)
 Stack<Integer> stk = new Stack<>();
@@ -75,6 +76,8 @@ stk.pop();
 stk.push();
 stk.size();
 stk.isEmpty();
+s.peek();
+min stack - store int[2] with element and min till now in the stack.
 
 Deque - If we want to have stack and queue in one data structure. It is a queue interface.
 Deque<Integer> deq = new ArrayDeque<>(); or ne LinkedList<>();
