@@ -1,5 +1,8 @@
 Taking greedy step at each step should lead to the ans.
 
+Check if 2 intervals are overlapping - [2, 10], [1, 12] -> Max(start_times) <= Min(end_times) If we don't know start_time of 2nd interval is more then start_time of 1st interval.
+If we know start_times are sorted, start_time_of_2 <= end_time_of_1 will say if intervals are overlapping.
+
 1. N meetings in a room - TC O(N) - Sort based on end times. 
 *****This question is same as remove min intervals from an interval arr such that rest all intervals are non-overlapping.
 Analogy - If a single person wants to attend max meetngs, he will greedily go to meeting that ends first.
