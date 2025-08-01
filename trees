@@ -479,3 +479,23 @@ class Solution {
     }
 }
 
+Find successor in BST for int b or Next Greater num-
+public class Solution {
+	public TreeNode getSuccessor(TreeNode a, int b) {
+        TreeNode ans=null;
+        while(a != null){
+            if(a.val <= b){
+                a = a.right;
+            }else{
+                if(ans == null) ans=a;
+                else{
+                    if(ans.val > a.val){
+                        ans = a;
+                    }
+                }
+                a = a.left;
+            }
+        }
+        return ans;
+	}
+}
