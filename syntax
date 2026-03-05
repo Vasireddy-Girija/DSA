@@ -35,6 +35,8 @@ Arrays.sort(primitive array/Object array)
 For Object array, Arrays.sort(objArr, Collections.reverseOrder());
 For primitive array, Arrays.sort(primArr, Collections.reverseOrder()) will NOT work.
 
+List<int> and Map<int, int> - primitives int doesn't work with Generics
+
 Map -
 Map<Integer, String> map = new HashMap<>();
 map.size();
