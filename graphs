@@ -260,28 +260,28 @@ Spanning Tree - A graph with N nodes and N-1 edges where all nodes are reachable
 Spanning tree with least edge sum is called minimum spanning tree.
 
 Prim's algorithm (Greedy)- TC - ElogE
-We need a priority queue to store (wt, node, parent), visited array, MST to store edges like (u,v), sum.
+We need a priority queue to store (wt, node, parent), MST set to store nodes in MST till now(this works similar to visited array), MSTedge list to store edges like (u,v), sum.
 Store parent in priority queue only if we want to create MST array. Otherwise parent is not needed in priority Queue.
 Start with (0, 0, -1) in priority queue. 
-IMP - Mark a node visited only when we remove it from priority queue. 
+IMP - Add a node to MST only after we poll from priority queue.
 Add to MST when we remove it from priority queue and it is already not visited. If it is not visited, add it to MST. Don't add 
-Put in priority queue only if node is not visited.
+Put in priority queue only if node is not in MST or visted.
 
 static int spanningTree(int V, int E, List<List<int[]>> adj) {
-        List<List<Integer>> MST = new ArrayList<>();
+        List<List<Integer>> MSTedge = new ArrayList<>();
+		Set<Integer> MSTnodes = new ArrayList<>();
         int minSpanningSum = 0;
-        int[] visited = new int[V];
 
         PriorityQueue<List<Integer>> pq = new PriorityQueue<>((a,b)->(a.get(0)-b.get(0)));
         pq.add(new ArrayList<>(Arrays.asList(0,0,-1))); //(wt, node, parent for MST)
 
-        while(!pq.isEmpty()){
+        while(!pq.isEmpty() && MSTnodes.size() != V){ //If we got all nodes in MST, we can stop. Just having pq empty also works.
             List<Integer> top = pq.poll();
             int wt = top.get(0);
             int u = top.get(1);
             int parent = top.get(2);
-            if(visited[u] != 1){
-                visited[u] = 1;
+            if(!MSTnodes.contains(u)){
+                MSTnodes.add(u);
                 if(parent != -1){
                     MST.add(new ArrayList<>(Arrays.asList(u, parent)));
                     minSpanningSum += wt;
@@ -289,7 +289,7 @@ static int spanningTree(int V, int E, List<List<int[]>> adj) {
                 for(int[] neigh : adj.get(u)){
                     int v = neigh[0];
                     int v_wt = neigh[1];
-                    if(visited[v] != 1){
+                    if(!MSTnodes.contains(v)){
                         pq.add(new ArrayList<>(Arrays.asList(v_wt, v, u)));
                     }
                 }
