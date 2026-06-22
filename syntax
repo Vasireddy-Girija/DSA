@@ -1,5 +1,9 @@
 primitive data types(8) - byte, short, int, float, double, long, char, boolean
 
+//Create long variable if int exceeds.
+int m,
+long square = (long)m*m;
+
 int - signed 32 bit - (2^31-1 to -2^31)
 long - signed 64 bit - (2^63-1 to -2^63)
 
@@ -21,6 +25,21 @@ List - List is an interface. Cannot create lists with primitives as it is not su
 ArrayList is implementation of List interface.
 List<Integer> lst = new ArrayList<>();
 Size of array list - lst.size();
+add(obj)
+add(idx, obj)
+addAll(collection)
+remove(idx)
+remove(obj) - removes first occurrence
+contains(obj)
+equals(lst)
+sort(comparator)
+get(idx)
+set(idx, obj)
+indexOf(obj) - return first index
+lastIndexOf(obj)
+isEmpty()
+clear()
+
 
 Array of lists - List<Integer>[] arrOfLists = new ArrayList[n]; //NOT new ArrayList<>[n];
 List of Arrays - List<Integer[]> listOfArr = new ArrayList<Integer[]>();
@@ -119,6 +138,17 @@ str2 = str.trim(); - remove leading and tailing empty spaces. Empy spaces in bet
 Character.isLetterOrDigit(ch)
 Character.toLowerCase(ch)
 String str.toLowerCase();
+
+str1.compareTo(str2) > 0 str1 is lexicographically greater than str2
+str1.compareTo(str2) < 0str1 is smaller than str2
+str1.compareTo(str2) == 0str1 and str2 are identical
+str1.compareToIgnoreCase(str2)
+
+core string regex methods -
+matches(String regex) Checks if the entire string fits the regular expression.boolean
+split(String regex)Splits the string into an array around matches of the regex.String[]
+replaceAll(String regex, String replacement)Replaces all substrings that match the regex with a new text.String
+replaceFirst(String regex, String replacement)
 
 
 int a = 1;
