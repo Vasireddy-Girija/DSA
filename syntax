@@ -173,6 +173,11 @@ str.charAt(i) -> same for string and stringBuilder
 if(ch=='+'||ch=='-'||ch=='*'||ch=='/') -> == works for primitive types
 if(str.equals("+")||str.equals("-")||str.equals("*")||str.equals("/")) -> equals works for string objects. == doesn't work for objects.
 
+string to int -
+Integer.valueOf(str)
+int to string -
+String.valueOf(int)
+
 Iterator -
 
 
